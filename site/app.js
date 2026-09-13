@@ -1,40 +1,22 @@
-const menuBtn = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.main-nav');
-menuBtn?.addEventListener('click', () => {
-const open = nav.classList.toggle('open');
-menuBtn.setAttribute('aria-expanded', String(open));
+import { config } from './config.js';
+const menu = document.querySelector('.menu-toggle');
+const nav = document.querySelector('nav');
+function closeMenu() { nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-label', 'Abrir menú'); }
+menu.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  menu.setAttribute('aria-expanded', String(open));
+  menu.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
 });
-nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
-const toast = document.getElementById('toast');
-function showToast(message){
-toast.textContent = message;
-toast.classList.add('show');
-clearTimeout(window.__toastTimer);
-window.__toastTimer = setTimeout(() => toast.classList.remove('show'), 3400);
+nav.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
+document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeMenu(); menu.focus(); } });
+if (/^[1-9]\d{7,14}$/.test(config.whatsappNumber)) {
+  const link = document.querySelector('#whatsappLink');
+  link.href = `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent('Hola, quiero conocer las opciones de crédito para mi pensión.')}`;
+  link.hidden = false;
+  document.querySelector('#contactStatus').textContent = 'Abre WhatsApp para conversar con nuestro equipo. Tú decides cuándo enviar el mensaje.';
 }
-function demoWhatsApp(){
-showToast('Demo visual: el número oficial de WhatsApp se conectará al aprobar el contenido.');
+if (config.privacyUrl.startsWith('https://')) {
+  const link = document.querySelector('#privacyLink');
+  link.href = config.privacyUrl;
+  link.hidden = false;
 }
-document.getElementById('waFloat')?.addEventListener('click', demoWhatsApp);
-document.getElementById('leadForm')?.addEventListener('submit', (e) => {
-e.preventDefault();
-const name = document.getElementById('name').value.trim();
-const phone = document.getElementById('phone').value.trim();
-if(!name || !phone){
-showToast('Para la demo, captura nombre y WhatsApp para probar el formulario.');
-return;
-}
-showToast(`Gracias, ${name}. La demo registró correctamente tu solicitud visual.`);
-});
-const observer = new IntersectionObserver((entries) => {
-entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-const sections = [...document.querySelectorAll('main section[id], header[id]')];
-const navLinks = [...document.querySelectorAll('.main-nav a[href^="#"]')];
-window.addEventListener('scroll', () => {
-const pos = window.scrollY + 150;
-let current = 'inicio';
-sections.forEach(sec => { if(sec.offsetTop <= pos) current = sec.id; });
-navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current}`));
-},{passive:true});
