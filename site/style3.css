@@ -1,0 +1,145 @@
+/* ===== Responsive final overrides: deben ir al final del CSS ===== */
+@media (max-width: 1250px){
+  .container,.quick-stats .container{width:min(1180px,calc(100% - 36px))}
+  .nav-wrap{grid-template-columns:210px 1fr auto;gap:18px}
+  .brand img{width:190px;height:58px}
+  .main-nav{gap:16px;font-size:11px}
+  .advisor-btn{padding:11px 16px}
+  .hero-grid{grid-template-columns:1fr 1.02fr}
+  .hero-promises{display:none}
+  .hero-copy{padding:30px 24px 24px 0}
+  .hero h1{font-size:42px}
+  .hero-photo,.hero-photo img{min-height:390px}
+  .lead-card{grid-column:1/-1;max-width:680px;width:calc(100% - 20px);margin:18px auto 28px}
+  .products-layout{grid-template-columns:1fr}
+  .simulator-card{max-width:760px;width:100%;justify-self:center}
+  .partner-pills{grid-template-columns:repeat(3,1fr)}
+}
+
+@media (max-width: 900px){
+  .container,.quick-stats .container{width:min(100% - 28px,840px)}
+  .demo-bar{height:auto;min-height:24px;padding:5px 10px;font-size:9px;text-align:center}
+  .site-header{position:sticky;top:0}
+  .nav-wrap{height:66px;grid-template-columns:1fr auto;gap:12px}
+  .brand img{width:165px;height:56px}
+  .advisor-btn{display:none}
+  .menu-toggle{display:block}
+  .main-nav{
+    display:none;position:absolute;left:14px;right:14px;top:66px;
+    flex-direction:column;gap:0;background:#fff;padding:8px 14px;
+    border-radius:0 0 14px 14px;box-shadow:0 16px 32px rgba(7,58,114,.16);
+    z-index:30
+  }
+  .main-nav.open{display:flex}
+  .main-nav a{width:100%;padding:12px 4px;border-bottom:1px solid #edf3f7}
+  .main-nav a:last-child{border-bottom:0}
+  .main-nav a.active:after{display:none}
+
+  .hero{padding-bottom:0}
+  .hero-grid{display:grid;grid-template-columns:1fr;min-height:0}
+  .hero-copy{padding:30px 0 20px;text-align:center}
+  .eyebrow{justify-content:center}
+  .hero h1{font-size:38px;max-width:680px;margin-left:auto;margin-right:auto}
+  .hero-lead{font-size:16px;max-width:620px;margin-left:auto;margin-right:auto}
+  .trust-row{max-width:620px;margin-left:auto;margin-right:auto}
+  .signature{text-align:center;margin:18px auto 0}
+  .hero-photo{height:360px;min-height:360px;border-radius:16px;overflow:hidden}
+  .hero-photo img{height:360px;min-height:360px;object-position:center 35%}
+  .social-proof{left:14px;bottom:14px}
+  .lead-card{grid-column:auto;width:100%;max-width:620px;margin:18px auto 24px}
+  .hero-promises{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 0 24px}
+  .hero-promises>div{grid-template-columns:34px 1fr;gap:6px;padding:8px;background:rgba(255,255,255,.72);border-radius:10px}
+  .hero-promises span{width:34px;height:34px;font-size:22px}
+  .hero-promises strong{font-size:11px}
+
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:0}
+  .stats-grid>div{padding:12px 10px;border-right:0;border-bottom:1px solid #d6e7f1}
+  .stats-grid>div:nth-child(odd){border-right:1px solid #d6e7f1}
+
+  .products{padding-top:22px}
+  .products-layout{display:block}
+  .compact-cards{grid-template-columns:repeat(2,1fr);margin-bottom:16px}
+  .simulator-card{grid-template-columns:1fr .72fr;max-width:none}
+  .steps-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .step:not(:last-child):after{display:none}
+  .partners-grid{grid-template-columns:1fr;gap:14px}
+  .partner-divider{display:none}
+  .partner-pills{grid-template-columns:repeat(3,1fr)}
+  .compact-testimonials .card-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:10px;text-align:center}
+  .footer-brand img{margin:auto}
+  .legal-links{justify-content:center;flex-wrap:wrap}
+  .socials{justify-content:center}
+}
+
+@media (max-width: 600px){
+  .container,.quick-stats .container{width:calc(100% - 24px)}
+  .nav-wrap{height:62px}
+  .brand img{width:145px;height:50px}
+  .menu-toggle{font-size:24px}
+  .main-nav{top:62px;left:12px;right:12px}
+
+  .hero-copy{padding:24px 0 16px}
+  .eyebrow{font-size:10px}
+  .hero h1{font-size:34px;line-height:1.02}
+  .hero-lead{font-size:15px;line-height:1.35}
+  .trust-row{grid-template-columns:repeat(3,1fr);gap:5px}
+  .trust-item strong{font-size:10px}
+  .trust-item span{display:none}
+  .icon-circle{width:38px;height:38px;font-size:15px}
+  .signature{font-size:17px}
+  .signature:after{width:140px}
+
+  .hero-photo{height:285px;min-height:285px;border-radius:14px}
+  .hero-photo img{height:285px;min-height:285px;object-position:center 32%}
+  .social-proof{padding:6px 9px;left:8px;bottom:8px}
+  .social-proof b{width:30px;height:30px}
+  .social-proof strong{font-size:18px}
+
+  .lead-card{padding:18px 14px;border-radius:14px}
+  .lead-card h2{font-size:21px}
+  .lead-card>p{font-size:10px}
+  .lead-card label,.lead-card input,.lead-card select{height:42px}
+  .cta{height:44px;font-size:13px}
+
+  .hero-promises{grid-template-columns:1fr;gap:7px}
+  .hero-promises>div{grid-template-columns:32px 1fr}
+  .hero-promises span{width:32px;height:32px}
+  .hero-promises strong{font-size:11px}
+
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stats-grid p{font-size:10px}
+  .stats-grid strong{font-size:13px}
+  .stat-icon{width:32px;height:32px;font-size:13px}
+
+  .section-head.compact h2,.section-head h2{font-size:22px}
+  .compact-cards{grid-template-columns:1fr}
+  .compact-cards .product-card{min-height:0}
+  .simulator-card{grid-template-columns:1fr;padding:12px}
+  .sim-head{grid-column:1}
+  .sim-result{min-height:96px}
+
+  .steps .section-head h2{font-size:20px}
+  .steps-grid{grid-template-columns:1fr}
+  .step{min-height:64px;padding-left:50px}
+  .step>span{width:32px;height:32px;left:4px}
+
+  .partner-title h2{font-size:17px}
+  .partner-pills{grid-template-columns:repeat(2,1fr)}
+  .partner-pill{min-height:52px;font-size:9px}
+
+  .compact-testimonials .testimonial{padding:10px 10px 10px 54px}
+  .wa-float{right:10px;bottom:10px;padding:7px}
+  .wa-float strong{display:none}
+  .wa-float span{width:38px;height:38px;font-size:20px}
+}
+
+@media (max-width: 390px){
+  .container,.quick-stats .container{width:calc(100% - 18px)}
+  .hero h1{font-size:30px}
+  .hero-lead{font-size:14px}
+  .hero-photo{height:250px;min-height:250px}
+  .hero-photo img{height:250px;min-height:250px}
+  .stats-grid{grid-template-columns:1fr}
+  .stats-grid>div,.stats-grid>div:nth-child(odd){border-right:0}
+}
