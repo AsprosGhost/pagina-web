@@ -14,8 +14,8 @@ Node.js 22 o posterior y npm. Ejecutar `npm ci`, `npm run build` y `npm start`. 
 
 ## Estado
 
-Vista previa, no sitio comercial terminado. No recopila datos ni finge registrar solicitudes. WhatsApp permanece inactivo hasta confirmar el número oficial. No calcula cotizaciones: falta Excel autorizado. Fotografías y testimonios pendientes de materiales aprobados; se han retirado los provisionales. No se modificó jubilcredit.com ni se conectó el CRM.
+Vista previa, no sitio comercial terminado. No recopila datos ni finge registrar solicitudes. WhatsApp permanece inactivo hasta confirmar el número oficial. No calcula cotizaciones: falta Excel autorizado. Diseño restaurado según referencia del usuario. Fotografía ilustrativa generada; testimonios conservan espacios pendientes sin opiniones ficticias. No se modificó jubilcredit.com ni se conectó el CRM.
 
-El commit de recuperación conserva la demo anterior con sus recursos publicados. Es una copia del contenido público, no de configuraciones privadas. El logotipo recuperado está embebido localmente en logo.js. El diseño actual no depende de imágenes alojadas en Wix.
+El commit de recuperación conserva la demo anterior con sus recursos publicados. Es una copia del contenido público, no de configuraciones privadas. El logotipo recuperado se conserva en logo.js; la versión visual actual reproduce la marca de la referencia mediante SVG y texto. El diseño actual no depende de imágenes alojadas en Wix.
 
 Consultar `docs/OPERACION.md` antes de publicar. Los controles automatizados ayudan a detectar errores; no sustituyen revisión visual ni aprobación comercial.

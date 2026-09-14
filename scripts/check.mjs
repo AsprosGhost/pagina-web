@@ -11,7 +11,7 @@ for(const [,url] of html.matchAll(/(?:src|href)="([^"]+)"/g)){
  else if(!/^(https?:|data:)/.test(url)) await access(resolve('site',url));
 }
 for(const file of await readdir('site')) if(file.endsWith('.js')) execFileSync(process.execPath,['--check',`site/${file}`]);
-assert(!/multiva|modalidad\s*40|250,000|testimonios|24 horas/i.test(html),'Unapproved content');
+assert(!/multiva|modalidad\s*40|250,000|24 horas/i.test(html),'Unapproved content');
 assert(!html.includes('<form'),'Contact collection must not be added without a verified endpoint and privacy notice');
 assert(config.whatsappNumber===''||/^[1-9]\d{7,14}$/.test(config.whatsappNumber),'Invalid WhatsApp number');
 assert(config.privacyUrl===''||config.privacyUrl.startsWith('https://'),'Invalid privacy URL');
