@@ -1,7 +1,11 @@
 # Estado de la base técnica
 
-Se recuperaron los seis archivos públicos de la demo y se conservaron en un commit anterior. La base nueva compila con npm ci y npm run build. GitHub aceptó la escritura tras actualizar el acceso al repositorio.
+Se conservaron los seis archivos públicos de la demo en un commit anterior. La nueva base compila y cuenta con comprobaciones automáticas. GitHub aceptó la escritura y Vercel generó una preview de esta rama.
 
-Cambios preparados en una rama de revisión. Pendientes: inspección visual en navegador, comprobar preview y conexión Vercel, WhatsApp oficial, aviso de privacidad, Excel cotizador, fotos autorizadas y validación comercial de Miguel. No se considera publicado hasta comprobar el despliegue. El diagrama de flujo sigue sin aprobación.
+El 14 de septiembre de 2026 se verificó la preview en navegador de escritorio: inicio, productos, proceso, pie y enlaces de navegación. Logotipos y estilos cargan; no se observó desbordamiento horizontal a 1363 px. Los errores de consola observados correspondían a una extensión del navegador, no a los scripts del sitio.
 
-Se verificaron compilación, sintaxis JavaScript, recursos referenciados y anclas. No se completó inspección visual: Chromium no estaba disponible y su descarga agotó el tiempo de conexión. No afirmar que escritorio o móvil fueron comprobados visualmente.
+Pendiente verificación visual móvil: la herramienta disponible no expone cambio de viewport y los atajos de zoom no modificaron su ancho. No presentar esta comprobación como prueba móvil. Se mantienen las reglas responsive del CSS.
+
+Pendientes comerciales: WhatsApp oficial, aviso de privacidad, Excel cotizador, fotos autorizadas y aprobación de contenido por Miguel. El sitio permanece como demo sin recepción de solicitudes ni cotización. El diagrama de flujo sigue sin aprobación. No se modifica jubilcredit.com.
+
+La publicación de la demo principal debe comprobarse después de integrar esta rama. Protección de rama y respaldo externo automático no se consideran configurados.
