@@ -55,3 +55,10 @@
 @media(max-width:1150px) and (min-width:851px){.client-badge{right:0;bottom:12px;min-width:220px;padding:10px 15px}.hero .signature{margin-left:20px;width:220px}.hero h1{max-width:490px}.hero:before{background:linear-gradient(100deg,#002b4a 0%,#034371 28%,rgba(3,63,104,.92) 39%,rgba(0,71,108,.35) 53%,transparent 68%)}}
 @media(min-width:521px) and (max-width:850px){.hero:before{background:linear-gradient(100deg,#002b4a 0%,#034371 30%,rgba(3,63,104,.8) 43%,transparent 72%)}.client-badge{right:0;bottom:8px;min-width:215px;padding:10px 14px}.hero .signature{margin-left:35px}.client-badge strong{font-size:26px}}
 @media(max-width:520px){.hero{background-color:#003b62}.hero:before{background:linear-gradient(135deg,#002b4a,#075486)}.hero-copy:after{z-index:0}.client-badge{z-index:1;right:0;bottom:12px;min-width:215px;padding:9px 14px}.client-badge strong{font-size:25px}.badge-check{width:40px;height:40px;font-size:27px}.hero .signature{margin-left:50px}.hero .lead-card{background:linear-gradient(135deg,#075486,#002f59)}}
+/* El cotizador y el lateral azul forman un solo panel, sin cajas superpuestas. */
+@media(min-width:851px){
+.hero{overflow:hidden;min-height:560px}
+.hero .lead-card{align-self:stretch;display:flex;flex-direction:column;justify-content:center;position:relative;background:#073b60;border:0;border-radius:0;box-shadow:100px 0 0 #073b60;padding:26px}
+.hero .lead-card .cta{flex-shrink:0}
+}
+@media(max-width:850px){.hero .lead-card{background:#003b62;border:0;box-shadow:none}}
