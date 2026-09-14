@@ -13,3 +13,6 @@ La página __review.html se genera exclusivamente en preview de Vercel para insp
 
 ## Complementos del cuestionario de Alicia
 Fuente: captura aportada por David, respuestas 1 a 6. Nómina $3,000–$750,000; domiciliado $3,000–$300,000 y opciones nuevo/segundo/renovación en apartado separado. Instituciones de los ejemplos confirmadas como “Todos Ok”. Requisitos: INE, contacto, NSS, talón de pago y estado de cuenta. Atención inmediata, información clara y acompañamiento hasta disposición. Se conserva la jerarquía indicada por David y Miguel, incluyendo adicional. Sigue vigente la exclusión de Multiva y Bancrea pese a la respuesta más permisiva del cuestionario. El cuestionario no valida 250,000 clientes, testimonios, tasas, plazos ni fórmulas del cotizador. Foto ajustada con canas sutiles y líneas de expresión leves.
+
+
+Mapa de cobertura: contorno de México convertido de GeoJSON a SVG; fuente https://github.com/johan/world.geo.json/blob/master/countries/MEX.geo.json. Colores adaptados a Jubilcredit. No se añaden marcadores de sucursales ni ubicaciones no verificadas.
