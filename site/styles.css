@@ -26,3 +26,19 @@
 @media(max-width:1150px){.product-card{padding:18px 12px;grid-template-columns:52px minmax(0,1fr);gap:10px}.product-card h3{font-size:14px}.product-card p{font-size:12px}.hero h1{font-size:30px}.hero h1 span{font-size:43px}.institution-logos{justify-content:flex-start;gap:16px}.nav-wrap{gap:16px}nav{gap:12px}}
 @media(max-width:850px){.container{width:calc(100% - 40px)}.hero{height:auto;background-size:auto 540px;background-position:center top;background-color:#e9f6fb}.hero-inner{grid-template-columns:1fr;gap:18px}.hero-copy{height:420px;padding-top:32px}.hero .signature{margin-left:140px}.hero h1{font-size:32px}.hero h1 span{font-size:45px}.hero-lead{font-size:18px}.trust-row{width:350px}.lead-card{width:min(100%,520px);padding:24px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-card{padding:22px;grid-template-columns:60px minmax(0,1fr)}.product-card p{font-size:14px}.institutions{grid-template-columns:1fr 260px;gap:20px}.testimonial-grid{grid-template-columns:1fr}.testimonial{min-height:100px}.testimonial p{font-size:14px}.testimonial small{font-size:12px}.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.container{width:calc(100% - 32px)}.hero{background-size:auto 420px;background-position:calc(50% - 70px) top}.hero-copy{height:380px;padding-top:25px}.hero h1{font-size:26px}.hero h1 span{font-size:39px}.hero-lead{font-size:15px}.trust-row{width:min(280px,100%)}.hero .signature{margin-left:70px;width:210px}.lead-card{padding:21px 18px}.product-grid,.steps,.institutions{grid-template-columns:1fr}.product-card{grid-template-columns:65px minmax(0,1fr)}.institution-logos{padding-left:0;gap:20px;justify-content:center}.institutions h2{text-align:center}.coverage{width:100%}.testimonial{padding:15px;gap:13px}.testimonial p{font-size:13px}.reference-note{text-align:center}.footer-inner{gap:20px}}
+/* Encuadre de la pareja independiente del ancho total y del cotizador. */
+@media(min-width:851px){
+.hero{background-color:#f1f5f5;background-size:auto 112%;background-position:right calc(clamp(16px,3.5vw,64px) + clamp(350px,29vw,460px) - 110px) top}
+.hero:before{background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.92) 22%,rgba(255,255,255,.35) 39%,transparent 49%)}
+.hero-copy{max-width:100%}.hero h1{max-width:650px}
+}
+@media(min-width:521px) and (max-width:850px){
+.hero{background-size:auto 440px;background-position:right top}
+.hero:before{background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.94) 32%,transparent 64%)}
+}
+@media(max-width:520px){
+.hero{background-image:none}.hero:before{display:none}
+.hero-copy{height:650px}
+.hero-copy:after{content:'';position:absolute;bottom:0;left:-16px;right:-16px;height:270px;background:#edf3f2 url('assets/hero-couple.jpg') no-repeat right top;background-size:auto 300px}
+.hero-inner{gap:16px}
+}
