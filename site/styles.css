@@ -80,4 +80,9 @@
 .request-summary p{font-size:13px!important;line-height:1.6!important;color:#06345a!important;overflow-wrap:anywhere}
 .request-summary button,.request-summary a{display:inline-block;min-height:44px;padding:10px 14px;border:1px solid #05865c;border-radius:24px;background:#e4fff3;color:#06345a;font:inherit;font-size:13px;cursor:pointer;text-decoration:none}
 .request-summary a[hidden]{display:none}
+.playful-quote [aria-invalid=true]{outline:3px solid #ffc98c;outline-offset:3px}
+.playful-quote button:focus-visible,.playful-quote input:focus-visible,.playful-quote select:focus-visible{outline:3px solid #a9ed78;outline-offset:3px}
+.playful-quote .amount-step{min-width:44px;min-height:44px}
+.playful-quote .amount-presets button{min-height:44px}
+@media(max-width:850px){.playful-quote .field select{font-size:16px}.playful-quote .quote-modes button{line-height:1.35;padding:9px 5px;overflow-wrap:anywhere}.request-summary button,.request-summary a{width:100%;text-align:center;margin-top:6px}}
 .request-summary button:focus-visible,.request-summary a:focus-visible{outline:3px solid #008857;outline-offset:3px}

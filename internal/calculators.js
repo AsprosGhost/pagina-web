@@ -56,6 +56,7 @@ export function sipreReference(principal, months) {
 }
 export function bancreaReference(principal, annual, months) {
   // Calculadora!E5 and local defined name Pago_Mensual use annual/12, not E12.
+  if (typeof annual !== 'number' || !Number.isFinite(annual) || annual < 0) throw new RangeError('annual rate');
   return payment(principal, annual / 12, months);
 }
 export function capacityFromIncome() {

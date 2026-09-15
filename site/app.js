@@ -1,5 +1,6 @@
 import { config } from './config.js';
 import { products, prepareRequest, requestText } from './quote-request.js';
+import { isPrivacyUrl, requestContactLink } from './contact.js';
 const menu=document.querySelector('.menu-toggle'),nav=document.querySelector('nav');
 function closeMenu(){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Abrir menú');}
 menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');});
@@ -17,6 +18,8 @@ const maxAmount=()=>products[productSelect.value].max;
 let mode='pension';
 const values={pension:'10000',amount:'50000'};
 function refresh(){
+ input.removeAttribute('aria-invalid');
+ document.querySelector('#institution').removeAttribute('aria-invalid');
  const n=Number(input.value);values[mode]=input.value;
  presets.forEach(b=>b.setAttribute('aria-pressed',String(input.value!==''&&Number(b.dataset.amount)===n)));
  document.querySelectorAll('[data-step]').forEach(b=>{b.disabled=Number(b.dataset.step)<0?n<=Number(input.min):mode==='amount'&&n>=maxAmount();});
@@ -68,12 +71,13 @@ document.querySelector('#quoteButton').addEventListener('click',()=>{
   help.textContent='Resumen preparado. Todavía no se ha enviado ninguna solicitud.';
   help.classList.add('selection-ready');
   const send=document.querySelector('#sendRequest');
-  send.hidden=!(hasWhatsApp && config.privacyUrl.startsWith('https://'));
-  if(!send.hidden) send.href=`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  const link=requestContactLink(config,message);
+  send.hidden=!link;
+  if(link) send.href=link;else send.removeAttribute('href');
  } catch(error) {
   summary.hidden=true;help.textContent=error.message;
-  if(!input.value || !input.checkValidity()) input.focus();
-  else document.querySelector('#institution').focus();
+  const invalid=(!input.value || !input.checkValidity())?input:document.querySelector('#institution');
+  invalid.setAttribute('aria-invalid','true');invalid.focus();
  }
 });
 document.querySelector('#copyRequest').addEventListener('click',async()=>{
@@ -86,4 +90,4 @@ const contact=document.querySelector('#whatsappLink');
 if(hasWhatsApp){contact.href=`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent('Hola, quiero conocer las opciones de crédito para mi pensión.')}`;document.querySelector('#contactStatus').textContent='Abre WhatsApp para conversar con nuestro equipo.';}
 document.querySelectorAll('[data-contact]').forEach(button=>button.addEventListener('click',()=>{if(hasWhatsApp)contact.click();else notify('Estamos configurando el número oficial. Esta demo todavía no recibe solicitudes.');}));
 document.querySelector('.legal-button').addEventListener('click',()=>notify('El aviso de privacidad y la información comercial están pendientes de validación. Esta demo no envía ni guarda los datos del cotizador.'));
-if(config.privacyUrl.startsWith('https://')){const a=document.querySelector('#privacyLink');a.href=config.privacyUrl;a.hidden=false;document.querySelector('.legal-button').hidden=true;}
+if(isPrivacyUrl(config.privacyUrl)){const a=document.querySelector('#privacyLink');a.href=config.privacyUrl;a.hidden=false;document.querySelector('.legal-button').hidden=true;}
