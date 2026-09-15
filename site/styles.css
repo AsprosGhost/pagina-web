@@ -87,6 +87,13 @@
 @media(max-width:850px){.playful-quote .field select{font-size:16px}.playful-quote .quote-modes button{line-height:1.35;padding:9px 5px;overflow-wrap:anywhere}.request-summary button,.request-summary a{width:100%;text-align:center;margin-top:6px}}
 .request-summary button:focus-visible,.request-summary a:focus-visible{outline:3px solid #008857;outline-offset:3px}
 /* Keep intrinsic text widths from enlarging the single-column mobile hero. */
+.lender-requirements{margin-top:22px;padding-top:18px;border-top:1px solid #dfebe8;scroll-margin-top:24px}
+.lender-requirements h4{margin:0 0 5px;font-size:18px;line-height:1.35}
+.lender-requirements p{margin:0 0 12px;font-size:13px;line-height:1.5}
+.lender-requirements .requirements-list{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.lender-requirements .requirements-list li{padding:8px 10px;font-size:12px;background:#f6fbfc;min-width:0;max-width:100%;overflow-wrap:anywhere}
+.lender-requirements .requirements-help{margin:0;color:#466079;font-size:12px}
+@media(max-width:520px){.lender-requirements .requirements-list{display:grid;grid-template-columns:1fr}.lender-requirements h4{font-size:17px}}
 .credit-selector{display:flex;flex-direction:column;gap:16px;padding:24px;min-width:0}
 .credit-selector h3{margin:0;font-size:20px}.credit-selector h4{margin:0 0 7px;font-size:18px}
 .product-tabs{display:flex;gap:5px;padding:5px;background:#edf7f8;border:1px solid #d6e9e6;border-radius:12px}
