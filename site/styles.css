@@ -71,3 +71,13 @@
 
 /* Cobertura: contorno geográfico vectorial, sin recortes de captura. */
 .coverage{position:relative;overflow:hidden;isolation:isolate;gap:12px;padding:18px 20px;background:radial-gradient(ellipse at 14% 45%,#0b6680 0%,#064568 38%,#002e58 80%);border:1px solid #357b9340;border-radius:20px;box-shadow:0 7px 22px #00345212;min-height:150px}.coverage:before{content:'';position:absolute;left:16px;right:16px;bottom:0;height:3px;border-radius:4px;background:linear-gradient(90deg,#94e744,#03bb91,transparent);opacity:.85}.coverage-map{display:block;width:46%;max-width:155px;height:auto;flex-shrink:0;filter:drop-shadow(0 4px 8px #001d3550);transition:transform .25s ease}.coverage p{font-size:13px;line-height:1.35;position:relative}.coverage strong{display:block;color:#c5f6df;font-size:20px;line-height:1.15;margin-top:2px;white-space:nowrap}.coverage p br{display:none}.coverage small{color:#daedf4;font-size:11px;margin-top:7px}@media(hover:hover){.coverage:hover .coverage-map{transform:translateY(-3px)}}@media(max-width:850px){.coverage{padding:16px 14px;gap:8px}.coverage strong{font-size:18px}}@media(max-width:520px){.coverage{justify-content:center;gap:24px;min-height:155px}.coverage-map{width:43%;max-width:150px}.coverage strong{font-size:22px}}@media(prefers-reduced-motion:reduce){.coverage-map{transition:none}.coverage:hover .coverage-map{transform:none}}
+
+/* Request preparation: no unvalidated financial results. */
+.quote-context{font-size:12px!important;line-height:1.5!important;margin:8px 0 12px!important;color:#e0f2ff}
+.request-summary{margin-top:14px;padding:16px;border:1px solid #78dcbc;border-radius:16px;background:#fff;color:#06345a;text-align:left;min-width:0}
+.request-summary[hidden]{display:none}
+.request-summary h3{font-size:16px;margin:0 0 8px}
+.request-summary p{font-size:13px!important;line-height:1.6!important;color:#06345a!important;overflow-wrap:anywhere}
+.request-summary button,.request-summary a{display:inline-block;min-height:44px;padding:10px 14px;border:1px solid #05865c;border-radius:24px;background:#e4fff3;color:#06345a;font:inherit;font-size:13px;cursor:pointer;text-decoration:none}
+.request-summary a[hidden]{display:none}
+.request-summary button:focus-visible,.request-summary a:focus-visible{outline:3px solid #008857;outline-offset:3px}

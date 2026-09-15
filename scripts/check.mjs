@@ -11,9 +11,10 @@ for(const [,url] of html.matchAll(/(?:src|href)="([^"]+)"/g)){
  else if(!/^(https?:|data:)/.test(url)) await access(resolve('site',url));
 }
 for(const file of await readdir('site')) if(file.endsWith('.js')) execFileSync(process.execPath,['--check',`site/${file}`]);
-assert(!/multiva|modalidad\s*40|24 horas/i.test(html),'Unapproved content');
+assert(!/multiva|bancrea|modalidad\s*40|24 horas/i.test(html),'Unapproved content');
 assert(!html.includes('<form'),'Contact collection must not be added without a verified endpoint and privacy notice');
 assert(config.whatsappNumber===''||/^[1-9]\d{7,14}$/.test(config.whatsappNumber),'Invalid WhatsApp number');
 assert(config.privacyUrl===''||config.privacyUrl.startsWith('https://'),'Invalid privacy URL');
 assert(html.includes('noindex,nofollow'),'Preview must not be indexed');
 console.log('Checks passed: assets, anchors, scripts, preview content and contact configuration.');
+execFileSync(process.execPath,['--test','tests/calculators.test.js'],{stdio:'inherit'});
