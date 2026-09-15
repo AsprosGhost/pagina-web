@@ -91,3 +91,30 @@ if(hasWhatsApp){contact.href=`https://wa.me/${config.whatsappNumber}?text=${enco
 document.querySelectorAll('[data-contact]').forEach(button=>button.addEventListener('click',()=>{if(hasWhatsApp)contact.click();else notify('Estamos configurando el número oficial. Esta demo todavía no recibe solicitudes.');}));
 document.querySelector('.legal-button').addEventListener('click',()=>notify('El aviso de privacidad y la información comercial están pendientes de validación. Esta demo no envía ni guarda los datos del cotizador.'));
 if(isPrivacyUrl(config.privacyUrl)){const a=document.querySelector('#privacyLink');a.href=config.privacyUrl;a.hidden=false;document.querySelector('.legal-button').hidden=true;}
+
+const productTabs=[...document.querySelectorAll('[data-product-tab]')];
+let exploredProduct='payroll';
+function showProduct(product){
+ exploredProduct=product;
+ const payroll=product==='payroll';
+ productTabs.forEach(tab=>{const selected=tab.dataset.productTab===product;tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1;});
+ document.querySelector('#product-panel').setAttribute('aria-labelledby',`tab-${product}`);
+ document.querySelector('#product-title').textContent=payroll?'Crédito nuevo':'Crédito domiciliado';
+ const description=document.querySelector('#product-description');
+ const amount=document.createElement('strong');amount.textContent=payroll?'$3,000 hasta $750,000':'$3,000 hasta $300,000';
+ description.replaceChildren('Desde ',amount,payroll?', con descuentos vía nómina. Consulta también estas opciones:':', con cobro directo por la financiera. Consulta estas opciones:');
+ document.querySelector('#product-options').replaceChildren(...(payroll?['Renovación','Compra de crédito','Crédito adicional']:['Crédito nuevo','Segundo crédito','Renovación']).map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
+}
+productTabs.forEach((tab,index)=>{
+ tab.addEventListener('click',()=>showProduct(tab.dataset.productTab));
+ tab.addEventListener('keydown',event=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+  event.preventDefault();
+  const next=event.key==='Home'?0:event.key==='End'?productTabs.length-1:(index+(event.key==='ArrowRight'?1:-1)+productTabs.length)%productTabs.length;
+  showProduct(productTabs[next].dataset.productTab);productTabs[next].focus();
+ });
+});
+document.querySelector('#consult-product').addEventListener('click',()=>{
+ productSelect.value=exploredProduct;productSelect.dispatchEvent(new Event('change'));
+ input.focus({preventScroll:true});
+});
