@@ -86,3 +86,6 @@
 .playful-quote .amount-presets button{min-height:44px}
 @media(max-width:850px){.playful-quote .field select{font-size:16px}.playful-quote .quote-modes button{line-height:1.35;padding:9px 5px;overflow-wrap:anywhere}.request-summary button,.request-summary a{width:100%;text-align:center;margin-top:6px}}
 .request-summary button:focus-visible,.request-summary a:focus-visible{outline:3px solid #008857;outline-offset:3px}
+/* Keep intrinsic text widths from enlarging the single-column mobile hero. */
+@media(max-width:850px){.hero-inner{grid-template-columns:minmax(0,1fr)}.hero-copy{min-width:0}}
+@media(max-width:360px){.amount-control{gap:5px}.amount-entry{padding:8px 6px}.amount-entry input{font-size:18px}.hero .signature{max-width:calc(100% - 50px)}.coverage{gap:12px}.coverage strong{font-size:20px}}
