@@ -122,3 +122,27 @@
 #contactAlternative p{font-size:13px;line-height:1.5}
 #contactAlternative button{min-height:44px}
 .form-privacy-link:focus-visible{outline:3px solid #b2ed52;outline-offset:2px}
+
+/* FAQ: compact editorial layout with a single accordion panel. */
+.faq-section{padding:54px 0;background:linear-gradient(120deg,#e7f5f8,#f5fbfa);border-block:1px solid #dbe9ee}
+.faq-layout{display:grid;grid-template-columns:minmax(240px,.8fr) minmax(0,1.45fr);gap:56px;align-items:center;max-width:1320px}
+.faq-intro{background:linear-gradient(140deg,#064966,#002d55);color:white;border-radius:24px;padding:34px;position:relative;overflow:hidden}
+.section-kicker{font-size:11px;letter-spacing:1.7px;font-weight:600;color:#a1eccf}
+.faq-intro h2{text-align:left;font-size:clamp(26px,2.6vw,38px);line-height:1.2;margin:20px 0 16px;color:white;letter-spacing:-1px}
+.faq-intro h2 span{color:#92e3b4}.faq-intro>p{font-size:14px;line-height:1.75;color:#dcebf1;max-width:330px}
+.faq-intro .faq-cta{margin:24px 0;background:#00b878;color:#fff;padding:13px 21px;font-size:13px;box-shadow:0 6px 20px #001c3325}
+.faq-cta:hover{background:#008f64;transform:translateY(-2px)}.faq-cta{transition:transform .18s,background .18s}
+.faq-contact-note{font-size:12px;line-height:1.6;color:#d5e7ed;border-top:1px solid #ffffff26;padding-top:18px}.faq-contact-note span{color:#8fe9b9;float:left;margin-right:10px}
+.faq-list{max-width:none;width:100%;margin:0;background:white;border:1px solid #d8e8ec;border-radius:20px;padding:8px 24px;box-shadow:0 12px 32px #003b6210}
+.faq-list details{border:0;border-bottom:1px solid #e0ebef;border-radius:0;margin:0;background:transparent}.faq-list details:last-child{border-bottom:0}
+.faq-list summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:21px 0;font-size:14px;line-height:1.5;min-height:68px}
+.faq-list summary::-webkit-details-marker{display:none}.faq-list summary::after{content:'+';display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:50%;background:#eaf7f2;color:#00845f;font-size:22px;font-weight:400}
+.faq-list details[open] summary::after{content:'−';background:#007957;color:white}.faq-list details[open] summary{color:#00765b}.faq-list details[open]{border-color:#e0ebef}
+.faq-list p{padding:0 42px 22px 0;color:#476575;font-size:14px;line-height:1.75}.faq-list summary:hover{color:#00845f}
+.brand-description{padding-top:36px;padding-bottom:36px}
+.privacy-page{background:#f0f7f9}.privacy-header{background:white;border-bottom:1px solid #dce8ed}.privacy-nav{display:flex;justify-content:space-between;align-items:center;padding:15px 0}.privacy-nav a{color:#003b62;font-weight:600;font-size:14px}
+.privacy-nav img{width:140px;height:84px;object-fit:contain}.privacy-shell{max-width:1120px;margin:0 auto;padding:50px 24px 64px}.privacy-hero{background:linear-gradient(130deg,#064e6a,#002f57);border-radius:24px;padding:36px;color:white}.privacy-hero h1{font-size:clamp(30px,5vw,46px);margin:12px 0;color:white}.privacy-hero p{max-width:700px;line-height:1.7;color:#dcedf5}
+.privacy-status{display:inline-block;font-size:12px;padding:6px 12px;border:1px solid #79c5b0;border-radius:20px;color:#bef2d5}.privacy-body{display:grid;grid-template-columns:230px minmax(0,1fr);gap:32px;margin-top:32px}.privacy-toc{align-self:start;position:sticky;top:20px;display:grid;gap:4px}.privacy-toc a{padding:10px 12px;text-decoration:none;color:#31586b;font-size:13px;border-radius:8px}.privacy-toc a:hover{background:#dff1eb;color:#00765b}.privacy-content{background:white;border:1px solid #dce8ed;border-radius:20px;padding:8px 30px 24px}.privacy-content section{padding:24px 0;border-bottom:1px solid #e3edf0;scroll-margin-top:24px}.privacy-content section:last-child{border:0}.privacy-content h2{text-align:left;font-size:20px;margin:0 0 12px}.privacy-content p,.privacy-content li{font-size:14px;line-height:1.85;color:#3e5d6c}.privacy-content ul{padding-left:20px}.privacy-content a{color:#00765b;overflow-wrap:anywhere}.privacy-footer{text-align:center;padding:24px;background:#002f57;color:white}.privacy-footer a{color:white}
+@media(max-width:850px){.faq-layout{gap:24px;grid-template-columns:1fr}.faq-intro{padding:28px}.faq-intro>p{max-width:560px}.faq-contact-note{display:none}.faq-intro .faq-cta{margin-bottom:0}.privacy-body{grid-template-columns:1fr}.privacy-toc{position:static;display:flex;flex-wrap:wrap;gap:4px}}
+@media(max-width:520px){.faq-section{padding:28px 0}.faq-list{padding:4px 18px}.faq-list summary{padding:18px 0;font-size:14px}.faq-list p{padding:0 0 20px}.faq-intro h2{font-size:30px}.privacy-shell{padding:24px 16px 40px}.privacy-hero{padding:25px}.privacy-content{padding:4px 20px 16px}.privacy-nav{padding:12px 18px}.privacy-nav img{width:110px;height:65px}}
+@media(prefers-reduced-motion:reduce){.faq-cta{transition:none}.faq-cta:hover{transform:none}}
