@@ -82,6 +82,7 @@ document.querySelector('#quoteButton').addEventListener('click',()=>{
   const send=document.querySelector('#sendRequest');
   const link=requestContactLink(config,message);
   send.hidden=!link;
+  document.querySelector('#contactAlternative').hidden=Boolean(link)||!hasWhatsApp;
   if(link) send.href=link;else send.removeAttribute('href');
  } catch(error) {
   summary.hidden=true;help.textContent=error.message;
@@ -101,7 +102,10 @@ const contact=document.querySelector('#whatsappLink');
 if(hasWhatsApp){contact.href=`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent('Hola, quiero conocer las opciones de crédito para mi pensión.')}`;document.querySelector('#contactStatus').textContent='Abre WhatsApp para conversar con nuestro equipo.';}
 document.querySelectorAll('[data-contact]').forEach(button=>button.addEventListener('click',()=>{if(hasWhatsApp)contact.click();else notify('Los números oficiales están publicados al pie. El envío desde esta demo todavía no está habilitado.');}));
 document.querySelector('.legal-button').addEventListener('click',()=>notify('El aviso de privacidad y la información comercial están pendientes de validación. Esta demo no envía ni guarda los datos del cotizador.'));
-if(isPrivacyUrl(config.privacyUrl)){const a=document.querySelector('#privacyLink');a.href=config.privacyUrl;a.hidden=false;document.querySelector('.legal-button').hidden=true;}
+if(isPrivacyUrl(config.privacyUrl)){
+ document.querySelectorAll('#privacyLink, #formPrivacyLink').forEach(a=>{a.href=config.privacyUrl;a.hidden=false;});
+ document.querySelector('.legal-button').hidden=true;
+}
 
 const productTabs=[...document.querySelectorAll('[data-product-tab]')];
 let exploredProduct='payroll';

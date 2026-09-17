@@ -115,3 +115,10 @@
 .faq-section{background:#f0f8fb;border-top:1px solid #dfebef;padding:32px 0}.faq-list{max-width:900px;margin:20px auto}.faq-list details{background:#fff;border:1px solid #d7e7e9;border-radius:12px;margin-bottom:10px;overflow:hidden}.faq-list summary{cursor:pointer;padding:17px 20px;font-weight:600;font-size:15px;min-height:48px}.faq-list summary::marker{color:#00966c}.faq-list details[open]{border-color:#79c5b0}.faq-list details[open] summary{color:#00775b}.faq-list p{margin:0;padding:0 20px 19px;font-size:14px;line-height:1.65}.faq-list summary:focus-visible,.faq-cta:focus-visible{outline:3px solid #00966c;outline-offset:-3px}.faq-cta{display:block;width:fit-content;margin:18px auto 0;background:#003b62;color:#fff;padding:12px 22px;border-radius:24px;text-decoration:none;font-weight:600;min-height:44px}.playful-quote .consultation-modes button:last-child{min-height:44px}
 @media(max-width:850px){.hero .lead-card{width:min(100%,620px);justify-self:center}.amount-entry input{font-size:22px}}
 @media(max-width:520px){.hero-copy{height:auto;padding-bottom:250px}.hero-copy:after{height:225px;background-size:auto 255px}.hero .signature{margin-top:18px;margin-bottom:20px}.hero .lead-card{padding:20px 14px}.faq-section{padding:25px 0}.faq-list summary{font-size:14px;padding:16px}.faq-list p{padding:0 16px 16px}.playful-quote .amount-entry input{font-size:20px}.footer-links{flex-wrap:wrap}}
+
+.form-privacy-link{display:block;text-align:center;color:#fff;text-underline-offset:3px;padding:12px 4px;font-size:12px;min-height:44px}
+.form-privacy-link[hidden],#contactAlternative[hidden]{display:none}
+#contactAlternative{border-top:1px solid #ffffff40;margin-top:14px;padding-top:12px}
+#contactAlternative p{font-size:13px;line-height:1.5}
+#contactAlternative button{min-height:44px}
+.form-privacy-link:focus-visible{outline:3px solid #b2ed52;outline-offset:2px}
