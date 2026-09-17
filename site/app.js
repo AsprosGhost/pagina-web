@@ -1,5 +1,5 @@
 import { config } from './config.js';
-import { products, prepareRequest, requestText } from './quote-request.js';
+import { products, prepareRequest, requestText, validateContact } from './quote-request.js';
 import { isPrivacyUrl, requestContactLink } from './contact.js';
 const menu=document.querySelector('.menu-toggle'),nav=document.querySelector('nav');
 function closeMenu(){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Abrir menú');}
@@ -15,10 +15,13 @@ const currency=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',ma
 const productSelect=document.querySelector('#creditType');
 const summary=document.querySelector('#requestSummary');
 const maxAmount=()=>products[productSelect.value].max;
-let mode='pension';
+let mode='amount';
+const nameInput=document.querySelector('#clientName'),phoneInput=document.querySelector('#clientPhone');
+nameInput.addEventListener('input',refresh);phoneInput.addEventListener('input',refresh);
 const values={pension:'10000',amount:'50000'};
 function refresh(){
  input.removeAttribute('aria-invalid');
+ nameInput.removeAttribute('aria-invalid');phoneInput.removeAttribute('aria-invalid');
  document.querySelector('#institution').removeAttribute('aria-invalid');
  const n=Number(input.value);values[mode]=input.value;
  presets.forEach(b=>b.setAttribute('aria-pressed',String(input.value!==''&&Number(b.dataset.amount)===n)));
@@ -65,7 +68,8 @@ document.querySelector('#quoteButton').addEventListener('click',()=>{
  try {
   if(!input.value || !input.checkValidity()) throw new Error(mode==='amount'?`Escribe un monto entre $3,000 y ${currency.format(maxAmount())}.`:'Escribe un ingreso neto mayor que cero.');
   const request=prepareRequest({product:productSelect.value,mode,amount:Number(input.value),institution:document.querySelector('#institution').value});
-  const message=requestText(request);
+  const contactDetails=validateContact(nameInput.value,phoneInput.value);
+  const message=`Nombre: ${contactDetails.name}. WhatsApp: ${contactDetails.phone}. ${requestText(request)}`;
   document.querySelector('#requestText').textContent=message;
   summary.hidden=false;
   help.textContent='Resumen preparado. Todavía no se ha enviado ninguna solicitud.';
@@ -76,7 +80,9 @@ document.querySelector('#quoteButton').addEventListener('click',()=>{
   if(link) send.href=link;else send.removeAttribute('href');
  } catch(error) {
   summary.hidden=true;help.textContent=error.message;
-  const invalid=(!input.value || !input.checkValidity())?input:document.querySelector('#institution');
+  let invalid=(!input.value || !input.checkValidity())?input:document.querySelector('#institution');
+  if(error.message.includes('tu nombre'))invalid=nameInput;
+  if(error.message.includes('WhatsApp de México'))invalid=phoneInput;
   invalid.setAttribute('aria-invalid','true');invalid.focus();
  }
 });
@@ -88,7 +94,7 @@ refresh();
 const hasWhatsApp=/^[1-9]\d{7,14}$/.test(config.whatsappNumber);
 const contact=document.querySelector('#whatsappLink');
 if(hasWhatsApp){contact.href=`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent('Hola, quiero conocer las opciones de crédito para mi pensión.')}`;document.querySelector('#contactStatus').textContent='Abre WhatsApp para conversar con nuestro equipo.';}
-document.querySelectorAll('[data-contact]').forEach(button=>button.addEventListener('click',()=>{if(hasWhatsApp)contact.click();else notify('Estamos configurando el número oficial. Esta demo todavía no recibe solicitudes.');}));
+document.querySelectorAll('[data-contact]').forEach(button=>button.addEventListener('click',()=>{if(hasWhatsApp)contact.click();else notify('Los números oficiales están publicados al pie. El envío desde esta demo todavía no está habilitado.');}));
 document.querySelector('.legal-button').addEventListener('click',()=>notify('El aviso de privacidad y la información comercial están pendientes de validación. Esta demo no envía ni guarda los datos del cotizador.'));
 if(isPrivacyUrl(config.privacyUrl)){const a=document.querySelector('#privacyLink');a.href=config.privacyUrl;a.hidden=false;document.querySelector('.legal-button').hidden=true;}
 

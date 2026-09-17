@@ -16,3 +16,14 @@ export function requestText(request) {
   const money = new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(request.amount);
   return `Me interesa un ${request.product.toLowerCase()}. Institución: ${request.institution}. ${request.mode === 'pension' ? 'Ingreso neto mensual después de descuentos' : 'Monto que me gustaría solicitar'}: ${money}. Quisiera recibir asesoría sobre los requisitos y plazos disponibles. Esta selección no es una cotización ni una aprobación.`;
 }
+
+export function validateContact(name, phone) {
+ const cleanName=typeof name==='string'?name.trim().replace(/\s+/g,' '):'';
+ if(cleanName.length<2 || cleanName.length>100 || !/\p{L}/u.test(cleanName)) throw new Error('Escribe tu nombre para preparar la consulta.');
+ const raw=typeof phone==='string'?phone.trim():'';
+ if(!/^[+\d\s()-]+$/.test(raw)) throw new Error('Escribe un WhatsApp de México de 10 dígitos.');
+ let digits=raw.replace(/\D/g,'');
+ if(digits.length===12 && digits.startsWith('52')) digits=digits.slice(2);
+ if(!/^[1-9]\d{9}$/.test(digits)) throw new Error('Escribe un WhatsApp de México de 10 dígitos, con o sin +52.');
+ return {name:cleanName,phone:digits};
+}
