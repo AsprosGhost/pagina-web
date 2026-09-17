@@ -1,16 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {payment,gemReference,exitusReference,sipreReference,bancreaReference,capacityFromIncome} from '../internal/calculators.js';
+import {payment,gemReference,exitusReference,sipreReference,bancreaReference,capacityFromIncome,sipreCapacityReference} from '../internal/calculators.js';
 import {prepareRequest,requestText} from '../site/quote-request.js';
 import {requestContactLink} from '../site/contact.js';
 import {reviewCase} from '../internal/review.mjs';
 const f=JSON.parse(readFileSync(new URL('./calculator-fixtures.json',import.meta.url)));
 const near=(a,b)=>assert(Math.abs(a-b)<.005, `${a} differs from ${b}`);
 test('Contact remains disabled with missing or malformed configuration',()=>{
- const config={whatsappNumber:'525500000000',privacyUrl:'https://example.org/privacidad'};
+ const config={requestSharingEnabled:true,whatsappNumber:'525500000000',privacyUrl:'https://example.org/privacidad'};
  for(const privacyUrl of ['', 'https://', 'http://example.org', 'javascript:alert(1)', 'https://user:password@example.org']) assert.equal(requestContactLink({...config,privacyUrl},'Consulta'),null);
  for(const whatsappNumber of ['', '+52 55', 'abc']) assert.equal(requestContactLink({...config,whatsappNumber},'Consulta'),null);
+ assert.equal(requestContactLink({...config,requestSharingEnabled:false},'Consulta'),null);
+ assert.equal(requestContactLink({...config,requestSharingEnabled:undefined},'Consulta'),null);
  const message='Ingreso $7,000 & consulta con acentos: pensión';
  const link=new URL(requestContactLink(config,message));
  assert.equal(link.hostname,'wa.me');assert.equal(link.searchParams.get('text'),message);
@@ -122,4 +124,26 @@ test('Declared capacity and unknown capacity remain distinct from requested cred
  assert(!requestText(unknown).includes('7,000'));
  for(const amount of [0,-1,NaN,null])assert.throws(()=>prepareRequest({...base,mode:'capacity',amount}));
  assert.throws(()=>prepareRequest({...base,mode:'amount',amount:750001}));
+});
+
+test('Declared capacity reproduces all nine Alicia screenshot suggestions',()=>{
+ const cases=[[12,69600,6990.77],[18,96300,6999.87],[24,118500,6994.61],[30,138100,6998.79],[36,173500,6999.67],[42,191400,6997.32],[48,207200,6997.89],[54,221100,6998.75],[60,233300,6998.93]];
+ for(const [months,principal,installment] of cases){
+  const r=sipreCapacityReference(7000,months);
+  assert.equal(r.principal,principal);near(r.installment,installment);assert.equal(r.withinDeclaredCapacity,true);
+ }
+});
+test('Capacity inverse matches stored sheet and respects source bounds',()=>{
+ for(const c of suggestions.filter(c=>c.calculator==='sipre')){
+  const r=sipreCapacityReference(3000,c.periods);assert.equal(r.principal,c.principal);near(r.installment,c.installment);
+ }
+ assert.deepEqual(sipreCapacityReference(7000.99,60),sipreCapacityReference(7000,60));
+ assert.equal(sipreCapacityReference(100000,60).principal,700000);
+ assert.equal(sipreCapacityReference(100,60).status,'no-reference');
+ for(const capacity of [0,-1,NaN,Infinity,'7000']) assert.throws(()=>sipreCapacityReference(capacity,60));
+ assert.throws(()=>sipreCapacityReference(7000,61));
+ const r=reviewCase({calculator:'sipre',capacity:7000,periods:60});
+ assert.equal(r.publicQuoteEnabled,false);assert.equal(r.inputs.capacitySource,'declared-monthly-unverified');
+ assert.throws(()=>reviewCase({calculator:'exitus',capacity:7000,periods:36}));
+ assert.throws(()=>reviewCase({calculator:'sipre',principal:50000,capacity:7000,periods:60}));
 });

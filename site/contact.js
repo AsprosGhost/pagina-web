@@ -3,6 +3,7 @@ export function isPrivacyUrl(value) {
  catch {return false;}
 }
 export function requestContactLink(config,message) {
+ if(config.requestSharingEnabled !== true) return null;
  if(!/^[1-9]\d{7,14}$/.test(config.whatsappNumber) || !isPrivacyUrl(config.privacyUrl)) return null;
  if(typeof message!=='string' || !message.trim()) return null;
  return `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(message)}`;

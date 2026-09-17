@@ -1,6 +1,6 @@
 # Cotizador Jubilcredit: revisión con Alicia
 
-Estado al 15 de septiembre de 2026. La página prepara consultas. Aún no determina cuánto puede recibir un cliente ni envía solicitudes. Este documento no es una aprobación comercial.
+Actualización al 17 de septiembre de 2026. La página prepara consultas. Aún no determina cuánto puede recibir un cliente ni envía resúmenes automáticamente. El contacto general abre WhatsApp al 55 8771 1739. Este documento no es una aprobación comercial.
 
 ## Avance comprobado
 
@@ -20,13 +20,13 @@ Las comparaciones usan valores guardados en los archivos. No equivalen a ejecuta
 
 | Prioridad | Pregunta concreta | Para qué se necesita |
 | --- | --- | --- |
-| 1 | Si alguien recibe $7,000 netos al mes, ¿qué cantidad se toma como capacidad de pago en cada producto? ¿Se restan otros créditos o hay un porcentaje/monto protegido? | Evitar usar todo el ingreso como descuento disponible. |
+| 1 | Capacidad aclarada: se recibe como dato mensual aproximado del cliente y la verifica el asesor. No se necesita una fórmula de ingreso a capacidad para esta ruta. | No confundir ingreso con capacidad disponible. |
 | 2 | ¿Qué productos y financieras sí pueden utilizarse en el cotizador público? Mantenemos excluidas Multiva y Bancrea. | Los archivos recibidos incluyen productos excluidos de la web; necesitamos identificar la oferta que sí se puede publicar. |
 | 3 | Para cada producto permitido: ¿qué instituciones, perfiles, montos, plazos y edades aplican? ¿La edad se mide al inicio o al finalizar? | Construir la selección correcta sin ampliar convenios por suposición. |
 | 4 | En Exitus, ¿son correctos la tasa ajustada de B11, apertura 5%, IVA de apertura y seguro mensual $123.31? ¿El seguro quincenal se cobra $61.655 o se redondea? | La fórmula y los títulos del archivo no coinciden. Confirmar el cargo real y sus redondeos. |
 | 5 | ¿Cuáles son los plazos vigentes de Exitus? El archivo tiene tablas de 48 meses, mientras en el audio se mencionan 60 meses como práctica general. | No aplicar 60 meses automáticamente a todos. |
 | 6 | ¿El monto escrito por el cliente representa el préstamo antes de comisiones o el dinero neto que quiere recibir? ¿Cómo se descuentan saldos en renovación y compra? | Diferenciar importe financiado, cargos y depósito recibido. |
-| 7 | ¿Cuál es el WhatsApp oficial, quién atiende, cuál es el aviso de privacidad vigente y el destino inicial: WhatsApp o registro en otro sistema? | Completar la recepción y comprobar a dónde llega la consulta. |
+| 7 | Número confirmado: 55 8771 1739. Confirmar responsable de atención y adecuación del aviso publicado al formulario de crédito. | Completar la recepción y comprobar a dónde llega la consulta. |
 
 Para SIPRE, si se mantiene únicamente para revisión interna: confirmar además si el límite es 83 años o 83 años y un mes, el máximo de monto aplicable y el alcance exacto de instituciones. No hace falta reactivar su publicación para revisar estas reglas.
 
@@ -47,3 +47,18 @@ Pedir un caso ficticio completo por cada producto que sí pueda publicarse: perf
 ## Cierre pendiente
 
 Después de recibir respuestas: actualizar únicamente reglas confirmadas, comparar los casos ficticios, revisar con Alicia los resultados y probar el contacto de extremo a extremo. Si un producto sigue ambiguo, conservarlo fuera del cotizador público y permitir orientación con asesor.
+
+
+## Ruta de capacidad implementada
+
+Se reprodujo SIPRE Sugerencias O4, N6:S14 y los rangos M_12 a M_60. La capacidad declarada se trunca a pesos enteros; se selecciona la tasa por el umbral de pago del plazo, se calcula el valor presente, se redondea hacia abajo a centenas, se limita a $700,000 y se vuelve a calcular la tasa y el pago para el monto resultante. Si la capacidad queda debajo del primer umbral, se devuelve sin referencia y sin oferta.
+
+Las nueve filas de la captura de Alicia para capacidad $7,000 coinciden en monto y pago a centavos. Ejemplo: 60 meses, $233,300 y $6,998.93 mensuales. También coinciden las nueve filas guardadas con capacidad $3,000. No se recalculó en Excel ni se ejecutaron macros. Los cuatro archivos recuperados coinciden por SHA-256 con las fuentes de las pruebas previas.
+
+Comando interno: `node scripts/review-calculator.mjs --calculator sipre --capacity 7000 --periods 60`.
+
+Este cálculo no aplica validación de edad ni acredita elegibilidad. El ejemplo de Alicia incluye una advertencia de edad: no debe transformarse en una oferta aprobada. El tope de esta hoja no sustituye el rango general de nómina de la web. Se conserva fuera de los archivos servidos al navegador.
+
+## Aviso recibido
+
+David proporcionó https://www.jubilcredit.com/aviso-de-privacidad. Se enlaza el documento publicado, sin afirmar validación jurídica. Su responsable es Colocación en Acción y sus finalidades descritas son comentarios del portal y publicidad; falta confirmar su correspondencia con los datos y finalidades de la consulta de crédito. La configuración separa el enlace público de la habilitación del resumen. El WhatsApp general sigue funcionando.
