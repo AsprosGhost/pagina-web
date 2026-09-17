@@ -18,7 +18,7 @@ const maxAmount=()=>products[productSelect.value].max;
 let mode='amount';
 const nameInput=document.querySelector('#clientName'),phoneInput=document.querySelector('#clientPhone');
 nameInput.addEventListener('input',refresh);phoneInput.addEventListener('input',refresh);
-const values={pension:'10000',amount:'50000'};
+const values={capacity:'',amount:'50000',advice:''};
 function refresh(){
  input.removeAttribute('aria-invalid');
  nameInput.removeAttribute('aria-invalid');phoneInput.removeAttribute('aria-invalid');
@@ -39,19 +39,24 @@ function refresh(){
 function setAmount(value){input.value=String(value);refresh();}
 document.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>{
  mode=button.dataset.mode;
+ document.querySelector('.amount-playground').hidden=mode==='advice';
+ document.querySelector('#capacityAdvice').hidden=mode!=='advice';
+ input.disabled=mode==='advice';
+ input.required=mode!=='advice';
  document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
- document.querySelector('#quoteLabel').textContent=mode==='pension'?'¿Cuánto recibes neto al mes?':'¿Qué monto de crédito te gustaría solicitar?';
+ document.querySelector('#quoteLabel').textContent=mode==='capacity'?'¿Cuál es tu capacidad de pago mensual aproximada?':'¿Qué monto de crédito te gustaría solicitar?';
  input.min=mode==='amount'?'3000':'1';
  if(mode==='amount')input.max=String(maxAmount());else input.removeAttribute('max');
- document.querySelector('#amountHint').textContent=mode==='pension'?'Escribe lo que recibes después de los descuentos de tu pensión o nómina.':'Esta cantidad es lo que te gustaría solicitar, no un monto autorizado.';
+ document.querySelector('#amountHint').textContent=mode==='capacity'?'Indica tu capacidad disponible aproximada, no tu ingreso total. El asesor la verificará con tus documentos.':'Esta cantidad es lo que te gustaría solicitar, no un monto autorizado.';
  slider.hidden=mode!=='amount';
- const examples=mode==='pension'?[5000,10000,15000]:[25000,50000,100000];
+ presets[0].parentElement.hidden=mode!=='amount';
+ const examples=mode==='capacity'?[5000,10000,15000]:[25000,50000,100000];
  presets.forEach((b,i)=>{b.dataset.amount=String(examples[i]);b.textContent=currency.format(examples[i]);});
  input.value=values[mode];refresh();
 }));
 presets.forEach(b=>b.addEventListener('click',()=>setAmount(Number(b.dataset.amount))));
 document.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>{
- const next=(Number(input.value)||0)+Number(b.dataset.step)*(mode==='pension'?500:1000);
+ const next=(Number(input.value)||0)+Number(b.dataset.step)*(mode==='capacity'?500:1000);
  setAmount(Math.min(mode==='amount'?maxAmount():Infinity,Math.max(Number(input.min),next)));
 }));
 input.addEventListener('input',refresh);
@@ -66,8 +71,8 @@ productSelect.addEventListener('change',()=>{
 });
 document.querySelector('#quoteButton').addEventListener('click',()=>{
  try {
-  if(!input.value || !input.checkValidity()) throw new Error(mode==='amount'?`Escribe un monto entre $3,000 y ${currency.format(maxAmount())}.`:'Escribe un ingreso neto mayor que cero.');
-  const request=prepareRequest({product:productSelect.value,mode,amount:Number(input.value),institution:document.querySelector('#institution').value});
+  if(mode!=='advice' && (!input.value || !input.checkValidity())) throw new Error(mode==='amount'?`Escribe un monto entre $3,000 y ${currency.format(maxAmount())}.`:'Escribe una capacidad de pago mayor que cero o elige asesoría.');
+  const request=prepareRequest({product:productSelect.value,mode,amount:mode==='advice'?null:Number(input.value),institution:document.querySelector('#institution').value});
   const contactDetails=validateContact(nameInput.value,phoneInput.value);
   const message=`Nombre: ${contactDetails.name}. WhatsApp: ${contactDetails.phone}. ${requestText(request)}`;
   document.querySelector('#requestText').textContent=message;
@@ -80,7 +85,7 @@ document.querySelector('#quoteButton').addEventListener('click',()=>{
   if(link) send.href=link;else send.removeAttribute('href');
  } catch(error) {
   summary.hidden=true;help.textContent=error.message;
-  let invalid=(!input.value || !input.checkValidity())?input:document.querySelector('#institution');
+  let invalid=(mode!=='advice' && (!input.value || !input.checkValidity()))?input:document.querySelector('#institution');
   if(error.message.includes('tu nombre'))invalid=nameInput;
   if(error.message.includes('WhatsApp de México'))invalid=phoneInput;
   invalid.setAttribute('aria-invalid','true');invalid.focus();
@@ -122,5 +127,5 @@ productTabs.forEach((tab,index)=>{
 });
 document.querySelector('#consult-product').addEventListener('click',()=>{
  productSelect.value=exploredProduct;productSelect.dispatchEvent(new Event('change'));
- input.focus({preventScroll:true});
+ (mode==='advice'?nameInput:input).focus({preventScroll:true});
 });

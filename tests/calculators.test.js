@@ -108,3 +108,18 @@ test('Contact preparation normalizes Mexican numbers and rejects missing or malf
  assert.deepEqual(validateContact('  José   Pérez  ', '+52 55 1234 5678'), {name:'José Pérez',phone:'5512345678'});
  for(const [name,phone] of [['','5512345678'],['123','5512345678'],['Ana','55123'],['Ana','+1 5551234567'],['Ana','5512345678abc']]) assert.throws(()=>validateContact(name,phone));
 });
+
+test('Declared capacity and unknown capacity remain distinct from requested credit', async () => {
+ const {prepareRequest,requestText}=await import('../site/quote-request.js');
+ const base={product:'payroll',institution:'IMSS'};
+ const capacity=prepareRequest({...base,mode:'capacity',amount:7000});
+ assert.match(requestText(capacity),/Capacidad de pago mensual aproximada declarada/);
+ assert.equal(capacity.estimatedLoan,null);
+ assert.equal(capacity.installment,null);
+ const unknown=prepareRequest({...base,mode:'advice',amount:7000});
+ assert.equal(unknown.amount,null);
+ assert.match(requestText(unknown),/No conozco mi capacidad/);
+ assert(!requestText(unknown).includes('7,000'));
+ for(const amount of [0,-1,NaN,null])assert.throws(()=>prepareRequest({...base,mode:'capacity',amount}));
+ assert.throws(()=>prepareRequest({...base,mode:'amount',amount:750001}));
+});

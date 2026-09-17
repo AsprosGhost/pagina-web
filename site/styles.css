@@ -109,3 +109,5 @@
 /* Confirmed questionnaire: contact preparation and real information. */
 .playful-quote .field input{height:44px;border-radius:10px;padding:0 13px;font-size:16px}.playful-quote .phone-hint{font-size:10px;text-align:left;margin:2px 0 10px}.brand-description{padding-top:25px;padding-bottom:25px}.brand-description h2{font-size:22px}.brand-description p{margin:10px 0}.hero .playful-quote{min-width:0}.steps p{overflow-wrap:anywhere}
 .brand-description{font-size:14px;color:var(--ink)}.brand-description p{line-height:1.6}.playful-quote .field>span:first-child{font-size:12px}.playful-quote>p{margin:6px 0 10px}.playful-quote .quote-eyebrow{margin-bottom:7px}.playful-quote .amount-playground{padding:12px;margin-bottom:8px}.playful-quote .amount-slider{padding-top:8px}
+
+.playful-quote .consultation-modes{display:flex;flex-wrap:wrap}.playful-quote .consultation-modes button{width:calc(50% - 3px);padding:8px 5px}.playful-quote .consultation-modes button:last-child{width:100%;min-height:36px;font-size:11px}.playful-quote #capacityAdvice{background:#ffffff12;padding:12px;border-radius:10px;text-align:left}

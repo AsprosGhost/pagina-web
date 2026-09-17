@@ -16,3 +16,7 @@ Número principal y función del segundo; URL vigente de privacidad; enlace exac
 ## Verificación
 
 Build y pruebas automatizadas. Navegador de escritorio: resumen incluye los cinco datos, normaliza +52 y desaparece al editar nombre; botón de envío oculto. Revisión visual de la página publicada. Las pruebas móviles anteriores no constituyen una nueva prueba física de esta versión en teléfonos.
+
+## Aclaración posterior de David: capacidad externa
+
+La capacidad de pago se recibe como dato aproximado del cliente y se verifica con el asesor; no se deriva automáticamente de su ingreso. La web ahora distingue monto deseado, capacidad mensual declarada y asesoría sin cantidad. Esta última descarta cualquier monto anterior del resumen. No se asignan ofertas ni cuotas a partir de una capacidad no verificada. Deja de ser requisito para esta ruta una fórmula de ingreso a capacidad; siguen pendientes las condiciones y calculadoras autorizadas para uso público. Build: 14 grupos de pruebas aprobados.
