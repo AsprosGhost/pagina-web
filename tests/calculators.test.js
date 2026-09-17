@@ -102,3 +102,9 @@ test('Public request has product-specific limits but never invents loan or insta
  assert.match(requestText(income),/Ingreso neto mensual después de descuentos/);
  assert.equal(income.estimatedLoan,null);
 });
+
+test('Contact preparation normalizes Mexican numbers and rejects missing or malformed data', async () => {
+ const {validateContact}=await import('../site/quote-request.js');
+ assert.deepEqual(validateContact('  José   Pérez  ', '+52 55 1234 5678'), {name:'José Pérez',phone:'5512345678'});
+ for(const [name,phone] of [['','5512345678'],['123','5512345678'],['Ana','55123'],['Ana','+1 5551234567'],['Ana','5512345678abc']]) assert.throws(()=>validateContact(name,phone));
+});
