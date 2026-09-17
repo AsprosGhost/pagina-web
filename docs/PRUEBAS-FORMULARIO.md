@@ -28,3 +28,16 @@ La página temporal de revisión se retira de producción al cerrar la prueba. E
 ## Alcance
 
 Esto comprueba diseño adaptable e interacción en Chrome de escritorio con anchos reducidos. No es una prueba física en Android/iPhone, teclado táctil, Safari, lector de pantalla ni WhatsApp real. No se enviaron solicitudes. Las cotizaciones y el contacto siguen pendientes de las confirmaciones comerciales ya documentadas.
+
+
+## Revisión responsive y preguntas frecuentes — 17 de septiembre de 2026
+
+- Se añadieron seis preguntas frecuentes basadas en información confirmada: montos, documentos, capacidad de pago desconocida, aprobación, acompañamiento y horarios. No se prometen tiempos de autorización o depósito.
+- Se ajustó la altura natural de la portada en celular y el ancho de la tarjeta del formulario en tablet.
+- Revisión en navegador con anchos simulados de 320, 390, 768 y 1024 px: sin desbordamiento horizontal. El área disponible descontó la barra de desplazamiento del navegador.
+- Se verificó la visibilidad de ambas caras en celular y tablet.
+- La consulta con capacidad desconocida genera un resumen sin monto; se verificó que el resumen cabe en el ancho móvil.
+- Se comprobó la apertura de una pregunta frecuente mediante teclado.
+- npm run build pasó los 14 grupos de pruebas y las verificaciones de publicación.
+- La página temporal de revisión responsive se retiró tras la comprobación. Estas comprobaciones no equivalen a pruebas en dispositivos físicos Android o iOS.
+- El formulario sigue preparando una consulta local; esta entrega no habilita cotización financiera ni envío automático.
