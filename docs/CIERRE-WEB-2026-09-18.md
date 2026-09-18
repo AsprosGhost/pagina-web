@@ -15,4 +15,10 @@ Implementación del 18 de septiembre, sobre la demo existente.
 Validar aviso de privacidad y habilitar el resumen a WhatsApp; probar recepción con Alicia; fotografías y ubicación vigentes; visto bueno de la versión; dominio y sustitución del sitio anterior. Sin prometer aprobación, plazos de dispersión o tasas.
 
 ## Verificación
-Compilación y 17 pruebas automáticas aprobadas. Referencias del DOM y separación de convenios/formulario verificadas. Pendientes: revisión visual y recorrido en navegador. El navegador disponible no accede al servidor local; la publicación del commit en master fue rechazada por revisión automática por requerir autorización explícita. La demo aún no incorpora esta tanda.
+Compilación y 17 pruebas automáticas aprobadas. Referencias del DOM y separación de convenios/formulario verificadas.
+
+Publicación autorizada por David y completada en la demo. Comprobadas en navegador de escritorio las rutas de monto, capacidad y asesoría; máximo de nómina $800,000; máximo domiciliado $300,000; normalización de +52; invalidación del resumen al editar; descarte de cantidades al cambiar modalidad; horarios y aviso local.
+
+El contacto apunta al número confirmado y abre un saludo general sin datos del formulario. El navegador remoto no dispone de la aplicación WhatsApp: esto no confirma recepción de mensajes. Pendiente prueba con Alicia.
+
+Mejora de teclado: Enter en nombre, teléfono o cantidad prepara el resumen local; no abre WhatsApp ni envía mensajes. Pendientes: revisión visual de anchos móviles y prueba en celular físico. El sitio anterior de Wix no se modifica.

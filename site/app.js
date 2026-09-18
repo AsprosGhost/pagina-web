@@ -55,6 +55,10 @@ document.querySelector('#quoteButton').addEventListener('click',()=>{
   invalid.setAttribute('aria-invalid','true');invalid.focus();
  }
 });
+// Enter prepares the local summary; it never sends or opens WhatsApp.
+for(const field of [nameInput,phoneInput,input])field.addEventListener('keydown',event=>{
+ if(event.key==='Enter' && !event.isComposing){event.preventDefault();document.querySelector('#quoteButton').click();}
+});
 document.querySelector('#copyRequest').addEventListener('click',async()=>{
  try {await navigator.clipboard.writeText(document.querySelector('#requestText').textContent);document.querySelector('#copyStatus').textContent='Resumen copiado. Puedes pegarlo al hablar con tu asesor.';}
  catch {document.querySelector('#copyStatus').textContent='No se pudo copiar automáticamente. Selecciona y copia el texto del resumen.';}
