@@ -1,6 +1,6 @@
 // Commercial ranges supplied by Alicia. These are request ranges, not eligibility.
 export const products = Object.freeze({
-  payroll: Object.freeze({label:'Crédito de nómina', min:3000, max:750000}),
+  payroll: Object.freeze({label:'Crédito de nómina', min:3000, max:800000}),
   direct: Object.freeze({label:'Crédito domiciliado', min:3000, max:300000})
 });
 export function prepareRequest({product, mode, amount, institution}) {
@@ -14,7 +14,7 @@ export function prepareRequest({product, mode, amount, institution}) {
 }
 export function requestText(request) {
   const money = new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(request.amount);
-  const detail=request.mode==='advice'?'No conozco mi capacidad de pago; necesito asesoría.':`${request.mode==='capacity'?'Capacidad de pago mensual aproximada declarada, pendiente de verificar':request.mode==='pension'?'Ingreso neto mensual después de descuentos':'Monto que me gustaría solicitar'}: ${money}.`;
+  const detail=request.mode==='advice'?'Necesito asesoría sin indicar una cantidad.':`${request.mode==='capacity'?'Capacidad de pago mensual aproximada declarada, pendiente de verificar':request.mode==='pension'?'Ingreso neto mensual después de descuentos':'Monto que me gustaría solicitar'}: ${money}.`;
   return `Me interesa un ${request.product.toLowerCase()}. Institución: ${request.institution}. ${detail} Quisiera recibir asesoría sobre los requisitos y plazos disponibles. Esta selección no es una cotización ni una aprobación.`;
 }
 
@@ -27,4 +27,10 @@ export function validateContact(name, phone) {
  if(digits.length===12 && digits.startsWith('52')) digits=digits.slice(2);
  if(!/^[1-9]\d{9}$/.test(digits)) throw new Error('Escribe un WhatsApp de México de 10 dígitos, con o sin +52.');
  return {name:cleanName,phone:digits};
+}
+
+// Routing is for advisor review, never an eligibility decision.
+export function productForInstitution(institution) {
+ if (!institution?.trim()) return null;
+ return ['IMSS','Gobierno del Estado de México'].includes(institution)?'payroll':'direct';
 }

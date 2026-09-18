@@ -97,8 +97,8 @@ test('Public request has product-specific limits but never invents loan or insta
  const r=prepareRequest(base);assert.equal(r.estimatedLoan,null);assert.equal(r.installment,null);
  assert.throws(()=>prepareRequest({...base,amount:300001}));
  assert.throws(()=>prepareRequest({...base,amount:2999}));
- assert.equal(prepareRequest({...base,product:'payroll',amount:750000}).amount,750000);
- assert.throws(()=>prepareRequest({...base,product:'payroll',amount:750001}));
+ assert.equal(prepareRequest({...base,product:'payroll',amount:800000}).amount,800000);
+ assert.throws(()=>prepareRequest({...base,product:'payroll',amount:800001}));
  assert.throws(()=>prepareRequest({...base,institution:''}));
  const income=prepareRequest({...base,mode:'pension',amount:7000});
  assert.match(requestText(income),/Ingreso neto mensual después de descuentos/);
@@ -120,10 +120,10 @@ test('Declared capacity and unknown capacity remain distinct from requested cred
  assert.equal(capacity.installment,null);
  const unknown=prepareRequest({...base,mode:'advice',amount:7000});
  assert.equal(unknown.amount,null);
- assert.match(requestText(unknown),/No conozco mi capacidad/);
+ assert.match(requestText(unknown),/Necesito asesoría sin indicar/);
  assert(!requestText(unknown).includes('7,000'));
  for(const amount of [0,-1,NaN,null])assert.throws(()=>prepareRequest({...base,mode:'capacity',amount}));
- assert.throws(()=>prepareRequest({...base,mode:'amount',amount:750001}));
+ assert.throws(()=>prepareRequest({...base,mode:'amount',amount:800001}));
 });
 
 test('Declared capacity reproduces all nine Alicia screenshot suggestions',()=>{
@@ -146,4 +146,11 @@ test('Capacity inverse matches stored sheet and respects source bounds',()=>{
  assert.equal(r.publicQuoteEnabled,false);assert.equal(r.inputs.capacitySource,'declared-monthly-unverified');
  assert.throws(()=>reviewCase({calculator:'exitus',capacity:7000,periods:36}));
  assert.throws(()=>reviewCase({calculator:'sipre',principal:50000,capacity:7000,periods:60}));
+});
+
+test('Pension institution routes advisor review independently of the visible agreements', async()=>{
+ const {productForInstitution}=await import('../site/quote-request.js');
+ assert.equal(productForInstitution(''),null);
+ for(const institution of ['IMSS','Gobierno del Estado de México']) assert.equal(productForInstitution(institution),'payroll');
+ for(const institution of ['ISSSTE','PEMEX','CFE','SEP','Otra institución']) assert.equal(productForInstitution(institution),'direct');
 });
