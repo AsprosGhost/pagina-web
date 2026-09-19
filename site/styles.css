@@ -154,3 +154,11 @@
 @media(max-width:520px){.hero-copy{height:auto}.hero-consult-cta{margin-top:16px}.hero-conditions{max-width:260px;font-size:11px}.institution-logos{display:grid;grid-template-columns:1fr}.agreement{justify-content:flex-start}.contact-card .field select{font-size:16px}.contact-card{scroll-margin-top:20px}}
 
 .share-consent{display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.6;margin:14px 0 4px;cursor:pointer}.share-consent input{flex:0 0 22px;width:22px;height:22px;margin:2px 0;accent-color:#00ae68}.share-consent span{flex:1}.share-consent [aria-invalid=true]{outline:3px solid #ffc98c;outline-offset:2px}
+
+/* Monto protagonista: jerarquía tipográfica sin un segundo botón de consulta. */
+.hero-credit-highlight{position:relative;z-index:2;width:min(100%,440px);margin:28px 0 28px;padding:6px 0 6px 22px;border-left:4px solid #95e331;background:linear-gradient(90deg,#00335380,transparent);color:#fff}
+.credit-highlight-label{display:block;font-size:11px;font-weight:700;letter-spacing:2px;color:#b9e8dc}
+.hero-credit-highlight .credit-highlight-amount{margin:10px 0 9px;line-height:1.05}.credit-highlight-amount>span{display:block;font-size:20px;font-weight:400;color:#fff;margin-bottom:3px}.credit-highlight-amount>strong{display:block;font-size:clamp(48px,5.2vw,76px);font-weight:700;letter-spacing:-2px;color:#95e331;white-space:nowrap}
+.hero-credit-highlight .credit-highlight-invite{font-size:17px;line-height:1.5;font-weight:700;margin:10px 0 7px;color:#fff}.hero-credit-highlight .credit-highlight-terms{font-size:12px;line-height:1.6;margin:0;color:#d4e9ed}
+@media(min-width:521px) and (max-width:850px){.hero-copy{height:auto;min-height:590px;padding-bottom:12px}.hero-credit-highlight{max-width:360px}}
+@media(max-width:520px){.hero-credit-highlight{margin:24px 0 16px;padding-left:16px}.credit-highlight-amount>strong{font-size:clamp(42px,12vw,58px);letter-spacing:-1.5px}.hero-credit-highlight .credit-highlight-invite{font-size:15px}.hero-credit-highlight .credit-highlight-terms{font-size:11px}}
