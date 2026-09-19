@@ -198,3 +198,8 @@
 @media(max-width:1100px) and (min-width:851px){.hero-reference-details{gap:12px;grid-template-columns:minmax(0,1fr) 165px}.hero-glass-card{padding:24px 12px}.hero-reference .credit-highlight-amount>strong{font-size:56px}.hero-reference .trust-row p{font-size:12px}.hero-reference .hero-credit-highlight .credit-highlight-invite{font-size:19px}}
 @media(max-width:850px){.hero .hero-inner{gap:20px}.hero .hero-reference{max-width:600px;width:100%;margin:auto;padding:20px 0}.hero .hero-reference h1{font-size:clamp(36px,6.2vw,52px)}.hero-reference .credit-highlight-amount>strong{font-size:clamp(56px,10vw,80px)}.hero .hero-reference .hero-lead{font-size:21px}.hero .lead-card{justify-self:center}.hero-reference-details{gap:16px}}
 @media(max-width:420px){.hero-reference-details{grid-template-columns:minmax(0,1fr)}.hero-reference .trust-row{max-width:340px;margin-bottom:30px}.hero-reference .credit-highlight-amount>strong{font-size:76px}.hero-glass-card{padding:18px;margin-top:8px}.glass-benefits{gap:12px}.hero-reference .hero-credit-highlight .credit-highlight-invite{font-size:23px}.hero .hero-reference h1{font-size:36px}.hero-reference .trust-row p{font-size:14px}}
+.hero .hero-reference{align-self:start;max-width:700px;padding-top:38px}
+.hero .hero-reference h1{font-size:clamp(36px,4.3vw,64px)}
+.hero-reference .trust-row>div .circle{background:transparent;box-shadow:none;border:1px solid #53cbae}
+@media(min-width:1101px){.hero-reference .trust-row p{font-size:16px}.hero-reference .credit-highlight-amount>strong{font-size:88px}}
+@media(max-width:850px){.hero .hero-reference{max-width:600px;padding-top:20px}.hero .hero-reference h1{font-size:clamp(36px,6.2vw,52px)}}
