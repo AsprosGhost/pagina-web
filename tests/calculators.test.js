@@ -154,3 +154,17 @@ test('Pension institution routes advisor review independently of the visible agr
  for(const institution of ['IMSS','Gobierno del Estado de México']) assert.equal(productForInstitution(institution),'payroll');
  for(const institution of ['ISSSTE','PEMEX','CFE','SEP','Otra institución']) assert.equal(productForInstitution(institution),'direct');
 });
+
+test('Configured WhatsApp destination preserves all consultation routes and accents',async()=>{
+ const {config}=await import('../site/config.js');
+ assert.equal(config.whatsappNumber,'525587711739');
+ assert.equal(config.requestSharingEnabled,true);
+ for(const mode of ['amount','capacity','advice']){
+  const r=prepareRequest({product:'payroll',institution:'Gobierno del Estado de México',mode,amount:mode==='amount'?50000:7000});
+  const message=`Nombre: Prueba José & Ana. WhatsApp: 5500000000. ${requestText(r)}`;
+  const url=new URL(requestContactLink(config,message));
+  assert.equal(url.origin,'https://wa.me');assert.equal(url.pathname,'/525587711739');
+  assert.equal(url.searchParams.get('text'),message);
+  if(mode==='advice')assert(!url.searchParams.get('text').includes('7,000'));
+ }
+});

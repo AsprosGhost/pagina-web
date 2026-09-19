@@ -12,15 +12,17 @@ const input=document.querySelector('#quoteValue'),help=document.querySelector('#
 const institution=document.querySelector('#institution'),modeSelect=document.querySelector('#requestMode');
 const nameInput=document.querySelector('#clientName'),phoneInput=document.querySelector('#clientPhone');
 const summary=document.querySelector('#requestSummary');
+const consent=document.querySelector('#shareConsent');
+consent.addEventListener('change',refresh);
 const currency=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
 function refresh(){
- for(const field of [input,institution,nameInput,phoneInput])field.removeAttribute('aria-invalid');
+ for(const field of [input,institution,nameInput,phoneInput,consent])field.removeAttribute('aria-invalid');
  summary.hidden=true;
  document.querySelector('#requestText').textContent='';
  document.querySelector('#copyStatus').textContent='';
  document.querySelector('#sendRequest').removeAttribute('href');
  help.classList.remove('selection-ready');
- help.textContent='Un asesor revisará tu perfil, requisitos y opciones. Preparar no es enviar.';
+ help.textContent='El botón abre WhatsApp con tus datos. Confirma el envío dentro de WhatsApp.';
  const product=productForInstitution(institution.value),mode=modeSelect.value;
  document.querySelector('#productHint').textContent=product?`Consulta orientada a ${products[product].label.toLowerCase()}. Sujeto a revisión del asesor.`:'Tu institución nos ayuda a orientar la consulta.';
  document.querySelector('#amountField').hidden=mode==='advice';input.disabled=mode==='advice';
@@ -44,18 +46,20 @@ document.querySelector('#quoteButton').addEventListener('click',()=>{
   const mode=modeSelect.value==='advice'||input.value===''?'advice':modeSelect.value;
   const request=prepareRequest({product,mode,amount:mode==='advice'?null:Number(input.value),institution:institution.value});
   const message=`Nombre: ${contactDetails.name}. WhatsApp: ${contactDetails.phone}. ${requestText(request)}`;
+  invalid=consent;
+  if(!consent.checked)throw new Error('Autoriza compartir tus datos para continuar en WhatsApp.');
   document.querySelector('#requestText').textContent=message;
-  summary.hidden=false;help.textContent='Resumen preparado. Revísalo antes de compartirlo con un asesor.';help.classList.add('selection-ready');
+  summary.hidden=false;help.textContent='Continúa en WhatsApp y pulsa Enviar. Si no se abrió, usa el enlace del resumen.';help.classList.add('selection-ready');
   const send=document.querySelector('#sendRequest'),link=requestContactLink(config,message);
   send.hidden=!link;document.querySelector('#contactAlternative').hidden=Boolean(link)||!hasWhatsApp;
-  if(link)send.href=link;else send.removeAttribute('href');
+  if(link){send.href=link;send.click();}else{send.removeAttribute('href');help.textContent='El envío no está disponible. Puedes copiar el resumen y contactar al asesor.';}
  }catch(error){
   summary.hidden=true;help.textContent=error.message;
   if(error.message.includes('WhatsApp de México'))invalid=phoneInput;
   invalid.setAttribute('aria-invalid','true');invalid.focus();
  }
 });
-// Enter prepares the local summary; it never sends or opens WhatsApp.
+// Enter follows the same validated, consented WhatsApp flow as the button.
 for(const field of [nameInput,phoneInput,input])field.addEventListener('keydown',event=>{
  if(event.key==='Enter' && !event.isComposing){event.preventDefault();document.querySelector('#quoteButton').click();}
 });
@@ -66,9 +70,9 @@ document.querySelector('#copyRequest').addEventListener('click',async()=>{
 refresh();
 const hasWhatsApp=/^[1-9]\d{7,14}$/.test(config.whatsappNumber);
 const contact=document.querySelector('#whatsappLink');
-if(hasWhatsApp){contact.href=`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent('Hola, quiero conocer las opciones de crédito para mi pensión.')}`;document.querySelector('#contactStatus').textContent='Abre WhatsApp para conversar con nuestro equipo.';}
+if(hasWhatsApp){contact.href=`https://wa.me/${config.whatsappNumber}`;document.querySelector('#contactStatus').textContent='Abre WhatsApp para conversar con nuestro equipo.';}
 document.querySelectorAll('[data-contact]').forEach(button=>button.addEventListener('click',()=>{if(hasWhatsApp)contact.click();else notify('Los números oficiales están publicados al pie. El envío desde esta demo todavía no está habilitado.');}));
-document.querySelector('.legal-button').addEventListener('click',()=>notify('El aviso de privacidad y la información comercial están pendientes de validación. Esta demo no envía ni guarda los datos del formulario.'));
+document.querySelector('.legal-button').addEventListener('click',()=>notify('El aviso de privacidad y la información comercial están pendientes de validación. El formulario abre WhatsApp con tu consulta cuando autorizas compartirla.'));
 if(isPrivacyUrl(config.privacyUrl)){
  document.querySelectorAll('#privacyLink, #formPrivacyLink').forEach(a=>{a.href=config.privacyUrl;a.hidden=false;});
  document.querySelector('.legal-button').hidden=true;
