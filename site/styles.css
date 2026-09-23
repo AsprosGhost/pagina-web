@@ -87,13 +87,13 @@
 @media(max-width:850px){.playful-quote .field select{font-size:16px}.playful-quote .quote-modes button{line-height:1.35;padding:9px 5px;overflow-wrap:anywhere}.request-summary button,.request-summary a{width:100%;text-align:center;margin-top:6px}}
 .request-summary button:focus-visible,.request-summary a:focus-visible{outline:3px solid #008857;outline-offset:3px}
 /* Keep intrinsic text widths from enlarging the single-column mobile hero. */
-.lender-requirements{margin-top:22px;padding-top:18px;border-top:1px solid #dfebe8;scroll-margin-top:24px}
-.lender-requirements h4{margin:0 0 5px;font-size:18px;line-height:1.35}
-.lender-requirements p{margin:0 0 12px;font-size:13px;line-height:1.5}
-.lender-requirements .requirements-list{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
-.lender-requirements .requirements-list li{padding:8px 10px;font-size:12px;background:#f6fbfc;min-width:0;max-width:100%;overflow-wrap:anywhere}
-.lender-requirements .requirements-help{margin:0;color:#466079;font-size:12px}
-@media(max-width:520px){.lender-requirements .requirements-list{display:grid;grid-template-columns:1fr}.lender-requirements h4{font-size:17px}}
+.requirements-card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:24px;scroll-margin-top:24px}
+.requirements-card h3{margin:0 0 5px;font-size:18px;line-height:1.35}
+.requirements-card p{margin:0 0 12px;font-size:13px;line-height:1.5}
+.requirements-card .requirements-list{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.requirements-card .requirements-list li{padding:8px 10px;font-size:12px;background:#f6fbfc;min-width:0;max-width:100%;overflow-wrap:anywhere}
+.requirements-card .requirements-help{margin:0;color:#466079;font-size:12px}
+@media(max-width:520px){.requirements-card .requirements-list{display:grid;grid-template-columns:1fr}.requirements-card h3{font-size:17px}}
 .credit-selector{display:flex;flex-direction:column;gap:16px;padding:24px;min-width:0}
 .credit-selector h3{margin:0;font-size:20px}.credit-selector h4{margin:0 0 7px;font-size:18px}
 .product-tabs{display:flex;gap:5px;padding:5px;background:#edf7f8;border:1px solid #d6e9e6;border-radius:12px}
@@ -162,3 +162,11 @@
 .hero-credit-highlight .credit-highlight-invite{font-size:17px;line-height:1.5;font-weight:700;margin:10px 0 7px;color:#fff}.hero-credit-highlight .credit-highlight-terms{font-size:12px;line-height:1.6;margin:0;color:#d4e9ed}
 @media(min-width:521px) and (max-width:850px){.hero-copy{height:auto;min-height:590px;padding-bottom:12px}.hero-credit-highlight{max-width:360px}}
 @media(max-width:520px){.hero-credit-highlight{margin:24px 0 16px;padding-left:16px}.credit-highlight-amount>strong{font-size:clamp(42px,12vw,58px);letter-spacing:-1.5px}.hero-credit-highlight .credit-highlight-invite{font-size:15px}.hero-credit-highlight .credit-highlight-terms{font-size:11px}}
+
+/* Requirements stand alongside the credit selector after removing lenders. */
+.credit-offering{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+.requirements-card h3{font-size:20px;margin-bottom:8px}
+.requirements-card .requirements-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
+.requirements-card .requirements-list li{font-size:13px;padding:12px}
+@media(max-width:850px){.credit-offering{grid-template-columns:1fr}}
+@media(max-width:520px){.requirements-card{padding:20px 16px}.requirements-card h3{font-size:18px}.requirements-card .requirements-list{grid-template-columns:1fr}}
