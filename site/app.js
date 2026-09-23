@@ -9,7 +9,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.conta
 let toastTimer;
 function notify(text){const toast=document.querySelector('#toast');toast.textContent=text;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),6500);}
 const input=document.querySelector('#quoteValue'),help=document.querySelector('#quoteHelp');
-const institution=document.querySelector('#institution'),modeSelect=document.querySelector('#requestMode');
+const institution=document.querySelector('#institution'),adviceChoice=document.querySelector('#needsAdvice');
 const nameInput=document.querySelector('#clientName'),phoneInput=document.querySelector('#clientPhone');
 const summary=document.querySelector('#requestSummary');
 const consent=document.querySelector('#shareConsent');
@@ -24,10 +24,10 @@ function refresh(){
  document.querySelector('#sendRequest').removeAttribute('href');
  help.classList.remove('selection-ready');
  help.textContent='El botón abre WhatsApp con tus datos. Confirma el envío dentro de WhatsApp.';
- const product=productForInstitution(institution.value),mode=modeSelect.value;
+ const product=productForInstitution(institution.value),mode=adviceChoice.checked?'advice':'amount';
  document.querySelector('#productHint').textContent=product?`Consulta orientada a ${products[product].label.toLowerCase()}. Sujeto a revisión del asesor.`:'Tu institución nos ayuda a orientar la consulta.';
  document.querySelector('#amountField').hidden=mode==='advice';input.disabled=mode==='advice';
- input.min=mode==='capacity'?'1':'3000';
+ input.min='3000';
  if(mode==='amount')input.max=String(products[product||'payroll'].max);else input.removeAttribute('max');
  slider.hidden=mode!=='amount';range.disabled=mode!=='amount';
  range.max=String(products[product||'payroll'].max);
@@ -36,14 +36,14 @@ function refresh(){
  range.style.setProperty('--range-progress',`${progress}%`);
  range.setAttribute('aria-valuetext',input.value?currency.format(Number(range.value)):'Sin monto seleccionado');
  document.querySelector('#rangeMaximum').textContent=currency.format(Number(range.max));
- input.placeholder=mode==='capacity'?'Ejemplo: 7000':'Elige tu monto';
- document.querySelector('#quoteLabel').textContent=mode==='capacity'?'Capacidad de pago mensual aproximada (opcional)':'Monto deseado (opcional)';
- document.querySelector('#amountHint').textContent=mode==='advice'?'Puedes continuar sin indicar una cantidad.':mode==='capacity'?'Es lo que podrías destinar al pago, no tu ingreso total. El asesor lo verificará.':'Puedes dejarlo vacío si prefieres orientación. No es un monto autorizado.';
+ input.placeholder='Elige tu monto';
+ document.querySelector('#quoteLabel').textContent='¿Cuánto te gustaría solicitar?';
+ document.querySelector('#amountHint').textContent=mode==='advice'?'Un asesor te ayudará a conocer tus opciones. Puedes continuar sin indicar una cantidad.':'Elige con la barra o escribe una cantidad. El monto está sujeto a evaluación y autorización.';
 }
 range.addEventListener('input',()=>{input.value=range.value;refresh();});
 for(const field of [input,nameInput,phoneInput])field.addEventListener('input',refresh);
 institution.addEventListener('change',refresh);
-modeSelect.addEventListener('change',()=>{input.value='';refresh();});
+adviceChoice.addEventListener('change',()=>{input.value='';refresh();});
 document.querySelector('#quoteButton').addEventListener('click',()=>{
  let invalid=institution;
  try {
@@ -52,8 +52,8 @@ document.querySelector('#quoteButton').addEventListener('click',()=>{
   const contactDetails=validateContact(nameInput.value,phoneInput.value);
   const product=productForInstitution(institution.value);
   invalid=input;
-  if(input.validity.badInput || (!input.disabled && input.value && !input.checkValidity()))throw new Error(modeSelect.value==='capacity'?'Escribe una capacidad mayor que cero o deja el campo vacío.':`Escribe un monto entre $3,000 y ${currency.format(products[product].max)}, o deja el campo vacío.`);
-  const mode=modeSelect.value==='advice'||input.value===''?'advice':modeSelect.value;
+  if(!input.disabled && (input.validity.badInput || (input.value && !input.checkValidity())))throw new Error(`Escribe un monto entre $3,000 y ${currency.format(products[product].max)}, o deja el campo vacío.`);
+  const mode=adviceChoice.checked?'advice':'amount'==='advice'||input.value===''?'advice':modeSelect.value;
   const request=prepareRequest({product,mode,amount:mode==='advice'?null:Number(input.value),institution:institution.value});
   const message=`Nombre: ${contactDetails.name}. WhatsApp: ${contactDetails.phone}. ${requestText(request)}`;
   invalid=consent;

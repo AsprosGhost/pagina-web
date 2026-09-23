@@ -190,3 +190,5 @@
 .contact-card #quoteRange:focus-visible{outline:2px solid #95e331;outline-offset:2px;border-radius:8px}
 .amount-range-labels{display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:700;color:#e8fff6}
 @media(max-width:520px){.contact-card .amount-picker{padding:12px}.contact-card .amount-picker-entry input{font-size:24px}}
+
+.advice-choice{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid #ffffff35;border-radius:10px;background:#ffffff08;color:#fff;font-size:13px;line-height:1.5;cursor:pointer;margin:12px 0}.advice-choice input{width:20px;height:20px;flex:0 0 20px;margin:1px 0 0;accent-color:#00ae68}.advice-choice:focus-within{outline:2px solid #95e331;outline-offset:3px}
