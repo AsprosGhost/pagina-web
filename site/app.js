@@ -14,6 +14,7 @@ const nameInput=document.querySelector('#clientName'),phoneInput=document.queryS
 const summary=document.querySelector('#requestSummary');
 const consent=document.querySelector('#shareConsent');
 consent.addEventListener('change',refresh);
+const range=document.querySelector('#quoteRange'),slider=document.querySelector('#amountSlider');
 const currency=new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:2});
 function refresh(){
  for(const field of [input,institution,nameInput,phoneInput,consent])field.removeAttribute('aria-invalid');
@@ -28,9 +29,18 @@ function refresh(){
  document.querySelector('#amountField').hidden=mode==='advice';input.disabled=mode==='advice';
  input.min=mode==='capacity'?'1':'3000';
  if(mode==='amount')input.max=String(products[product||'payroll'].max);else input.removeAttribute('max');
+ slider.hidden=mode!=='amount';range.disabled=mode!=='amount';
+ range.max=String(products[product||'payroll'].max);
+ range.value=input.value||range.min;
+ const progress=(Number(range.value)-Number(range.min))/(Number(range.max)-Number(range.min))*100;
+ range.style.setProperty('--range-progress',`${progress}%`);
+ range.setAttribute('aria-valuetext',input.value?currency.format(Number(range.value)):'Sin monto seleccionado');
+ document.querySelector('#rangeMaximum').textContent=currency.format(Number(range.max));
+ input.placeholder=mode==='capacity'?'Ejemplo: 7000':'Elige tu monto';
  document.querySelector('#quoteLabel').textContent=mode==='capacity'?'Capacidad de pago mensual aproximada (opcional)':'Monto deseado (opcional)';
  document.querySelector('#amountHint').textContent=mode==='advice'?'Puedes continuar sin indicar una cantidad.':mode==='capacity'?'Es lo que podrías destinar al pago, no tu ingreso total. El asesor lo verificará.':'Puedes dejarlo vacío si prefieres orientación. No es un monto autorizado.';
 }
+range.addEventListener('input',()=>{input.value=range.value;refresh();});
 for(const field of [input,nameInput,phoneInput])field.addEventListener('input',refresh);
 institution.addEventListener('change',refresh);
 modeSelect.addEventListener('change',()=>{input.value='';refresh();});

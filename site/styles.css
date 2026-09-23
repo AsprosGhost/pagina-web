@@ -170,3 +170,23 @@
 .requirements-card .requirements-list li{font-size:13px;padding:12px}
 @media(max-width:850px){.credit-offering{grid-template-columns:1fr}}
 @media(max-width:520px){.requirements-card{padding:20px 16px}.requirements-card h3{font-size:18px}.requirements-card .requirements-list{grid-template-columns:1fr}}
+
+/* Touch-friendly requested amount control; never an automatic quotation. */
+.contact-card .amount-picker{margin:16px 0 8px;padding:16px;border:1px solid #ffffff35;border-radius:14px;background:#052f4b80}
+.amount-picker>label{display:block;font-size:12px;color:#e1f3fa;margin-bottom:8px}
+.amount-picker-entry{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid #b4e8d5;border-radius:10px;padding:0 12px;color:#00664e}
+.amount-picker-entry>span{font-size:25px;font-weight:700}
+.contact-card .amount-picker-entry input{border:0;background:transparent;font-size:26px;font-weight:700;line-height:1.2;color:#003b62;height:54px;min-width:0;padding:0;width:100%;border-radius:6px}
+.contact-card .amount-picker-entry input::placeholder{font-size:18px;font-weight:400;color:#637d8c}
+.amount-picker-entry:focus-within{outline:3px solid #95e331;outline-offset:3px}
+.amount-picker-entry input:focus{outline:none;box-shadow:none}
+.amount-slider-caption{display:block;font-size:12px;color:#e1f3fa;margin-top:14px}
+.contact-card #quoteRange{appearance:none;-webkit-appearance:none;display:block;width:100%;height:44px;cursor:pointer;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;background:transparent;accent-color:#95e331}
+#quoteRange::-webkit-slider-runnable-track{height:8px;border-radius:8px;background:linear-gradient(to right,#95e331 0%,#95e331 var(--range-progress,0%),#ffffff45 var(--range-progress,0%),#ffffff45 100%)}
+#quoteRange::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:26px;height:26px;margin-top:-9px;border:3px solid #fff;border-radius:50%;background:#00ae68;box-shadow:0 2px 8px #001b3a55}
+#quoteRange::-moz-range-track{height:8px;border-radius:8px;background:#ffffff45}
+#quoteRange::-moz-range-progress{height:8px;border-radius:8px;background:#95e331}
+#quoteRange::-moz-range-thumb{width:20px;height:20px;border:3px solid #fff;border-radius:50%;background:#00ae68}
+.contact-card #quoteRange:focus-visible{outline:2px solid #95e331;outline-offset:2px;border-radius:8px}
+.amount-range-labels{display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:700;color:#e8fff6}
+@media(max-width:520px){.contact-card .amount-picker{padding:12px}.contact-card .amount-picker-entry input{font-size:24px}}
