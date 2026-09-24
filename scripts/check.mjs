@@ -19,4 +19,4 @@ if(config.privacyUrl.startsWith('/')) await access(resolve('site',config.privacy
 assert(config.privacyUrl===''||isPrivacyUrl(config.privacyUrl),'Invalid privacy URL');
 assert(html.includes('noindex,nofollow'),'Preview must not be indexed');
 console.log('Checks passed: assets, anchors, scripts, preview content and contact configuration.');
-execFileSync(process.execPath,['--test','tests/calculators.test.js'],{stdio:'inherit'});
+execFileSync(process.execPath,['--test','tests/calculators.test.js','tests/contact-ui.test.js'],{stdio:'inherit'});
