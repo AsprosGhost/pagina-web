@@ -110,7 +110,7 @@ function showProduct(product){
  const description=document.querySelector('#product-description');
  const amount=document.createElement('strong');amount.textContent=payroll?'$3,000 hasta $800,000':'$3,000 hasta $300,000';
  description.replaceChildren('Desde ',amount,payroll?', con descuentos vía nómina, sujeto a evaluación y autorización. Consulta también estas opciones:':', con cobro directo por la financiera. Consulta estas opciones:');
- document.querySelector('#product-options').replaceChildren(...(payroll?['Renovación','Compra de crédito','Crédito adicional']:['Crédito nuevo','Segundo crédito','Renovación']).map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
+ document.querySelector('#product-options').replaceChildren(...(payroll?['Renovación','Crédito adicional','Compra de deuda']:['Crédito nuevo','Renovación','Segundo crédito']).map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
 }
 productTabs.forEach((tab,index)=>{
  tab.addEventListener('click',()=>showProduct(tab.dataset.productTab));
