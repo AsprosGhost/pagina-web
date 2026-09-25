@@ -198,3 +198,28 @@
 .advice-choice{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid #ffffff35;border-radius:10px;background:#ffffff08;color:#fff;font-size:13px;line-height:1.5;cursor:pointer;margin:12px 0}.advice-choice input{width:20px;height:20px;flex:0 0 20px;margin:1px 0 0;accent-color:#00ae68}.advice-choice:focus-within{outline:2px solid #95e331;outline-offset:3px}
 
 .request-product{border:0;padding:0;margin:18px 0 12px;min-width:0}.request-product legend{font-size:13px;margin-bottom:9px;color:#fff}.request-product-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}.request-product-options label{position:relative;display:flex;cursor:pointer;min-width:0}.request-product-options input{position:absolute;opacity:0;width:1px;height:1px}.request-product-options span{display:flex;flex-direction:column;justify-content:center;gap:4px;min-height:74px;width:100%;padding:12px 8px;border:1px solid #ffffff65;border-radius:11px;background:#ffffff0a;color:#fff;text-align:center}.request-product-options strong{font-size:14px}.request-product-options small{font-size:11px}.request-product-options input:checked+span{background:#eafff3;border:2px solid #00c97a;padding:11px 7px;color:#004b3f;box-shadow:0 2px 8px #001c3330}.request-product-options input:focus-visible+span{outline:3px solid #95e331;outline-offset:3px}.request-product #selectedProductHint{font-size:11px;line-height:1.5;color:#d1e9f2;margin:9px 0 0;text-align:left}
+
+/* Stable photo framing: the form's intrinsic height must not enlarge the couple. */
+@media(min-width:1101px){
+  .hero{--hero-form-width:clamp(350px,25vw,410px);--hero-edge:clamp(16px,3.5vw,64px);height:auto;background-image:none;background-color:#073b60}
+  .hero-inner{height:auto;grid-template-columns:minmax(0,1fr) var(--hero-form-width)}
+  .hero:before{right:calc(var(--hero-edge) + var(--hero-form-width));bottom:auto;height:calc((100vw - var(--hero-edge) - var(--hero-form-width)) * .666667);background-image:linear-gradient(90deg,#002b4a 0%,#034371 25%,rgba(3,63,104,.92) 36%,rgba(3,63,104,.35) 49%,transparent 63%),linear-gradient(0deg,#073b60 0%,transparent 22%),url('assets/hero-couple.jpg');background-size:100% 100%,100% 100%,100% auto;background-position:top right;background-repeat:no-repeat}
+  .hero-copy{padding-top:clamp(32px,3vw,56px);padding-bottom:32px}
+  .hero h1{max-width: min(650px,47%);font-size:clamp(30px,2.5vw,46px)}
+  .hero h1 span{font-size:clamp(43px,3.5vw,64px)}
+  .hero-lead{max-width:46%;font-size:clamp(18px,1.35vw,24px)}
+  .hero .trust-row{width:min(46%,480px);gap:12px}
+  .hero .trust-row p{font-size:12px}
+  .hero-credit-highlight{max-width:46%;padding-left:16px}
+  .credit-highlight-amount>strong{font-size:clamp(43px,4vw,70px)}
+  .hero .contact-card{justify-content:flex-start}
+}
+@media(min-width:851px) and (max-width:1100px){
+  .hero{height:auto;background-size:auto 630px;background-position:right top}
+  .hero-inner{height:auto;grid-template-columns:minmax(0,1fr);gap:20px}
+  .hero-copy{height:auto;min-height:630px;padding-top:36px;padding-bottom:24px}
+  .hero h1{max-width:490px}
+  .hero-lead,.hero .trust-row{max-width:390px}
+  .hero:before{background:linear-gradient(90deg,#002b4a 0%,#034371 29%,rgba(3,63,104,.8) 43%,transparent 67%),linear-gradient(0deg,#073b60 calc(100% - 630px),transparent calc(100% - 510px))}
+  .hero .lead-card{width:min(100%,620px);justify-self:center;box-shadow:none;border-radius:16px;margin-bottom:24px}
+}
