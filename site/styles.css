@@ -92,7 +92,7 @@
 .requirements-card p{margin:0 0 12px;font-size:13px;line-height:1.5}
 .requirements-card .requirements-list{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
 .requirements-card .requirements-list li{padding:8px 10px;font-size:12px;background:#f6fbfc;min-width:0;max-width:100%;overflow-wrap:anywhere}
-.requirements-card .requirements-help{margin:0;color:#466079;font-size:12px}
+.requirements-card .requirements-help{margin:0;color:#38556d;font-size:14px;line-height:1.6}
 @media(max-width:520px){.requirements-card .requirements-list{display:grid;grid-template-columns:1fr}.requirements-card h3{font-size:17px}}
 .credit-selector{display:flex;flex-direction:column;gap:16px;padding:24px;min-width:0}
 .credit-selector h3{margin:0;font-size:20px}.credit-selector h4{margin:0 0 7px;font-size:18px}
