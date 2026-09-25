@@ -168,6 +168,10 @@
 .requirements-card h3{font-size:20px;margin-bottom:8px}
 .requirements-card .requirements-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
 .requirements-card .requirements-list li{font-size:13px;padding:12px}
+.requirements-card .requirements-list li{display:flex;align-items:center;gap:14px;min-height:116px;font-size:14px}
+.requirements-card .requirements-list li:before{content:none}
+.requirements-card .requirements-list img{flex:none;width:54px;height:54px}
+.requirements-card .requirements-list span{overflow-wrap:anywhere}
 @media(max-width:850px){.credit-offering{grid-template-columns:1fr}}
 @media(max-width:520px){.requirements-card{padding:20px 16px}.requirements-card h3{font-size:18px}.requirements-card .requirements-list{grid-template-columns:1fr}}
 
